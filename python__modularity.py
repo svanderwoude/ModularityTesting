@@ -113,7 +113,7 @@ def calculate_modularity(root, log=True):
         print('Overall modularity (avg):', average(_alllperc) * 100)
         print('Overall modularity (med):', median(_alllperc) * 100)
         print('Overall modularity (min):', min(_alllperc) * 100)
-        print('Overall modularity (max):', max(_alllperc) * 100)
+        print('Overall modularity (max):', max(_alllperc) * 100, end='\n\n')
 
     return average(_alllperc), median(_alllperc), min(_alllperc), max(_alllperc)
 
