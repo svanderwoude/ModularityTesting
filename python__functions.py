@@ -1,4 +1,8 @@
 import ast
+import os
+
+from numpy import average
+from numpy.ma import median
 
 
 def calls(abstree):
@@ -27,56 +31,86 @@ if __name__ == '__main__':
     _calls = {}
     _definitions = []
     _alllperc = []
+    _errorcount = 0
+    _pathcount = 0
 
-    paths = ['testmodule.py', 'testscript.py', 'moduletest.py']
+    root = '/home/svanderwoude/UvA/Thesis/repos/'
 
     # Set up function definitions and funciton calls for each file
-    for path in paths:
-        with open(path) as file:
-            data = file.read()
-            abstree = ast.parse(data)
+    for subdir, dirs, paths in os.walk(root):
+        for path in paths:
+            if not path.endswith('.py'):
+                continue
 
-            for call in calls(abstree):
-                # Exclude defaults (only print for now)
-                if call != 'print':
-                    create_or_update(_calls, call, path)
-            
-            for definition in definitions(abstree):
-                _definitions.append(definition + '_' + path)
+            subdir = os.path.join(root, subdir)
+            path = os.path.join(subdir, path)
+            _pathcount += 1
+
+            try:
+                with open(path) as file:
+                    data = file.read()
+
+                    try:
+                        abstree = ast.parse(data)
+                    except SyntaxError:
+                        _errorcount += 1
+                        _pathcount -= 1
+                        continue
+
+                    for call in calls(abstree):
+                        # Exclude defaults (only print for now)
+                        if call != 'print':
+                            create_or_update(_calls, call, path)
+                    
+                    for definition in definitions(abstree):
+                        _definitions.append(definition + '_' + path)
+            except FileNotFoundError:
+                _errorcount += 1
+                _pathcount -= 1
 
     
     # Calculate modularity for each file
-    for path in paths:
-        fcalls = [c for c in _calls if c.endswith(path)]
-        fdefs = [d for d in _definitions if d.endswith(path)]
+    for subdir, dirs, paths in os.walk(root):
+        for path in paths:
+            if not path.endswith('.py'):
+                continue
 
-        local = intersection(fcalls, fdefs)
-        all_count = 0
-        local_count = 0
+            subdir = os.path.join(root, subdir)
+            path = os.path.join(subdir, path)
+            fcalls = [c for c in _calls if c.endswith(path)]
+            fdefs = [d for d in _definitions if d.endswith(path)]
 
-        # Get local function call count
-        for call in local:
-            local_count += _calls[call]
-            all_count += _calls[call]
-            fcalls.remove(call)
+            local = intersection(fcalls, fdefs)
+            all_count = 0
+            local_count = 0
 
-        # Get all leftover function calls
-        for call in fcalls:
-            all_count += _calls[call]
+            # Get local function call count
+            for call in local:
+                local_count += _calls[call]
+                all_count += _calls[call]
+                fcalls.remove(call)
 
-        # Modularity percentage
-        perc = 1
+            # Get all leftover function calls
+            for call in fcalls:
+                all_count += _calls[call]
 
-        if all_count > 0:
-            perc = local_count / all_count
+            # Modularity percentage
+            perc = 1
 
-        _alllperc.append(perc)
+            if all_count > 0:
+                perc = local_count / all_count
 
-        print('Local call count:', local_count)
-        print('Total call count:', all_count)
-        print('Modularity percentage:', perc * 100, end='\n\n')
+            _alllperc.append(perc)
+
+            print('FILE:', path)
+            print('Local call count:', local_count)
+            print('Total call count:', all_count)
+            print('Modularity percentage:', perc * 100, end='\n\n')
 
     print('-' * 50, end='\n\n')
-    print('Overall modularity (avg):', (sum(_alllperc) / len(paths)) * 100)
+    print('Tested %d files' % _pathcount)
+    print('Failed %d files' % _errorcount)
+    print('Overall modularity (avg):', average(_alllperc) * 100)
+    print('Overall modularity (med):', median(_alllperc) * 100)
     print('Overall modularity (min):', min(_alllperc) * 100)
     print('Overall modularity (max):', max(_alllperc) * 100)
