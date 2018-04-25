@@ -27,14 +27,12 @@ def intersection(lst1, lst2):
     return [value for value in lst1 if value in lst2]
 
 
-if __name__ == '__main__':
+def calculate_modularity(root, log=True):
     _calls = {}
     _definitions = []
     _alllperc = []
     _errorcount = 0
     _pathcount = 0
-
-    root = '/home/svanderwoude/UvA/Thesis/repos/'
 
     # Set up function definitions and funciton calls for each file
     for subdir, dirs, paths in os.walk(root):
@@ -102,15 +100,23 @@ if __name__ == '__main__':
 
             _alllperc.append(perc)
 
-            print('FILE:', path)
-            print('Local call count:', local_count)
-            print('Total call count:', all_count)
-            print('Modularity percentage:', perc * 100, end='\n\n')
+            if log:
+                print('FILE:', path)
+                print('Local call count:', local_count)
+                print('Total call count:', all_count)
+                print('Modularity percentage:', perc * 100, end='\n\n')
 
-    print('-' * 50, end='\n\n')
-    print('Tested %d files' % _pathcount)
-    print('Failed %d files' % _errorcount)
-    print('Overall modularity (avg):', average(_alllperc) * 100)
-    print('Overall modularity (med):', median(_alllperc) * 100)
-    print('Overall modularity (min):', min(_alllperc) * 100)
-    print('Overall modularity (max):', max(_alllperc) * 100)
+    if log:
+        print('-' * 50, end='\n\n')
+        print('Tested %d files' % _pathcount)
+        print('Failed %d files' % _errorcount)
+        print('Overall modularity (avg):', average(_alllperc) * 100)
+        print('Overall modularity (med):', median(_alllperc) * 100)
+        print('Overall modularity (min):', min(_alllperc) * 100)
+        print('Overall modularity (max):', max(_alllperc) * 100)
+
+    return average(_alllperc), median(_alllperc), min(_alllperc), max(_alllperc)
+
+
+if __name__ == '__main__':
+    calculate_modularity('/home/svanderwoude/UvA/Thesis/repos/')
