@@ -92,4 +92,4 @@ def calculate_maintainability(root, log=True):
 
 
 if __name__ == '__main__':
-    calculate_maintainability('/home/svanderwoude/UvA/Thesis/repos/')
+    calculate_maintainability('/home/svanderwoude/UvA/Thesis/Projects/flask/')

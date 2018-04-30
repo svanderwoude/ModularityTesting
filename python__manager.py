@@ -9,10 +9,13 @@ def section_header(section):
 
 
 if __name__ == '__main__':
-    root = '/home/svanderwoude/UvA/Thesis/repos/'
+    # root = '/home/svanderwoude/UvA/Thesis/Projects/flask/'
+    # root = '/home/svanderwoude/UvA/Thesis/Projects/falcon/'
+    root = '/home/svanderwoude/UvA/Thesis/Projects/bottle/'
+    # root = '/home/svanderwoude/UvA/Thesis/Projects/cherrypy/'
 
     section_header('modularity')
     mavg, mmed, mmin, mmax = calculate_modularity(root, True)
 
-    section_header('maintainability')
-    testcoverage, volume = calculate_maintainability(root, True)
+    # section_header('maintainability')
+    # testcoverage, volume = calculate_maintainability(root, True)

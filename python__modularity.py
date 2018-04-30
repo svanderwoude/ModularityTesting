@@ -5,6 +5,25 @@ from numpy import average
 from numpy.ma import median
 
 
+builtin_functions = [
+    'abs', 'dict', 'help', 'min', 'setattr',
+    'all', 'dir', 'hex', 'next', 'slice',
+    'any', 'divmod', 'id', 'object', 'sorted',
+    'ascii', 'enumerate', 'input', 'oct', 'staticmethod',
+    'bin', 'eval', 'int', 'open', 'str',
+    'bool', 'exec', 'isinstance', 'ord', 'sum',
+    'bytearray', 'filter', 'issubclass', 'pow', 'super',
+    'bytes', 'float', 'iter', 'print', 'tuple',
+    'callable', 'format', 'len', 'property', 'type',
+    'chr', 'frozenset', 'list', 'range', 'vars',
+    'classmethod', 'getattr', 'locals', 'repr', 'zip',
+    'compile', 'globals', 'map', 'reversed', '__import__',
+    'complex', 'hasattr', 'max', 'round',
+    'delattr', 'hash', 'memoryview', 'set',
+    'int', 'float', 'bool', 'str', 'self', 'exit',
+]
+
+
 def calls(abstree):
     return [node.func.id for node in ast.walk(abstree)
             if type(node) is ast.Call and type(node.func) is ast.Name]
@@ -37,7 +56,7 @@ def calculate_modularity(root, log=True):
     # Set up function definitions and funciton calls for each file
     for subdir, dirs, paths in os.walk(root):
         for path in paths:
-            if not path.endswith('.py'):
+            if not path.endswith('.py') or 'test' in path:
                 continue
 
             subdir = os.path.join(root, subdir)
@@ -56,8 +75,8 @@ def calculate_modularity(root, log=True):
                         continue
 
                     for call in calls(abstree):
-                        # Exclude defaults (only print for now)
-                        if call != 'print':
+                        # Exclude built-in functions
+                        if not call in builtin_functions and not call.endswith('Error'):
                             create_or_update(_calls, call, path)
                     
                     for definition in definitions(abstree):
@@ -70,7 +89,7 @@ def calculate_modularity(root, log=True):
     # Calculate modularity for each file
     for subdir, dirs, paths in os.walk(root):
         for path in paths:
-            if not path.endswith('.py'):
+            if not path.endswith('.py') or 'test' in path:
                 continue
 
             subdir = os.path.join(root, subdir)
