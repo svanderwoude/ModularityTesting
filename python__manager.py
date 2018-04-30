@@ -10,8 +10,8 @@ def section_header(section):
 
 if __name__ == '__main__':
     # root = '/home/svanderwoude/UvA/Thesis/Projects/flask/'
-    # root = '/home/svanderwoude/UvA/Thesis/Projects/falcon/'
-    root = '/home/svanderwoude/UvA/Thesis/Projects/bottle/'
+    root = '/home/svanderwoude/UvA/Thesis/Projects/falcon/'
+    # root = '/home/svanderwoude/UvA/Thesis/Projects/bottle/'
     # root = '/home/svanderwoude/UvA/Thesis/Projects/cherrypy/'
 
     section_header('modularity')

@@ -4,6 +4,8 @@ import os
 from numpy import average
 from numpy.ma import median
 
+from python__libraryfunctions import res
+
 
 builtin_functions = [
     'abs', 'dict', 'help', 'min', 'setattr',
@@ -21,7 +23,7 @@ builtin_functions = [
     'complex', 'hasattr', 'max', 'round',
     'delattr', 'hash', 'memoryview', 'set',
     'int', 'float', 'bool', 'str', 'self', 'exit',
-]
+] + res
 
 
 def calls(abstree):
@@ -76,7 +78,8 @@ def calculate_modularity(root, log=True):
 
                     for call in calls(abstree):
                         # Exclude built-in functions
-                        if not call in builtin_functions and not call.endswith('Error'):
+                        if(not call in builtin_functions and
+                           not call.endswith('Error')):
                             create_or_update(_calls, call, path)
                     
                     for definition in definitions(abstree):
