@@ -40,30 +40,17 @@ def calculate_volume(path):
     return 0
 
 
-def calculate_maintainability(root, log=True):
+def calculate_maintainability(files, log=True):
     _calls = {}
     _definitions = []
     _allperc_testcoverage = []
     _all_volume = []
-    _errorcount = 0
-    _pathcount = 0
 
     # Set up function definitions and funciton calls for each file
-    for subdir, dirs, paths in os.walk(root):
-        for path in paths:
-            if not path.endswith('.py') or 'test' in path:
-                continue
-
-            subdir = os.path.join(root, subdir)
-            path = os.path.join(subdir, path)
-            _pathcount += 1
-
-            try:
-                testcoverage = calculate_testcoverage(path)
-                volume = calculate_volume(path)
-            except FileNotFoundError:
-                _errorcount += 1
-                _pathcount -= 1
+    for subdir in files:
+        for path in subdir:
+            testcoverage = calculate_testcoverage(path)
+            volume = calculate_volume(path)
 
             _allperc_testcoverage.append(testcoverage)
             _all_volume.append(volume)
@@ -75,8 +62,6 @@ def calculate_maintainability(root, log=True):
 
     if log:
         print('-' * 50, end='\n\n')
-        print('Tested %d files' % _pathcount)
-        print('Failed %d files' % _errorcount)
         print('Overall test coverage (avg):', average(_allperc_testcoverage) * 100)
         print('Overall test coverage (med):', median(_allperc_testcoverage) * 100)
         print('Overall test coverage (min):', min(_allperc_testcoverage) * 100)

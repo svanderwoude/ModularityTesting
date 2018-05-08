@@ -48,55 +48,38 @@ def intersection(lst1, lst2):
     return [value for value in lst1 if value in lst2]
 
 
-def calculate_modularity(root, log=True):
+def calculate_modularity(files, log=True):
     _calls = {}
     _definitions = []
     _alllperc = []
     _errorcount = 0
-    _pathcount = 0
 
     # Set up function definitions and funciton calls for each file
-    for subdir, dirs, paths in os.walk(root):
-        for path in paths:
-            if not path.endswith('.py') or 'test' in path:
-                continue
+    for subdir in files:
+        for path in subdir:
+            with open(path) as file:
+                data = file.read()
 
-            subdir = os.path.join(root, subdir)
-            path = os.path.join(subdir, path)
-            _pathcount += 1
+                try:
+                    abstree = ast.parse(data)
+                except SyntaxError:
+                    _errorcount += 1
 
-            try:
-                with open(path) as file:
-                    data = file.read()
+                    continue
 
-                    try:
-                        abstree = ast.parse(data)
-                    except SyntaxError:
-                        _errorcount += 1
-                        _pathcount -= 1
-                        continue
-
-                    for call in calls(abstree):
-                        # Exclude built-in functions
-                        if(not call in builtin_functions and
-                           not call.endswith('Error')):
-                            create_or_update(_calls, call, path)
-                    
-                    for definition in definitions(abstree):
-                        _definitions.append(definition + '_' + path)
-            except FileNotFoundError:
-                _errorcount += 1
-                _pathcount -= 1
+                for call in calls(abstree):
+                    # Exclude built-in functions
+                    if(not call in builtin_functions and
+                       not call.endswith('Error')):
+                        create_or_update(_calls, call, path)
+                
+                for definition in definitions(abstree):
+                    _definitions.append(definition + '_' + path)
 
     
     # Calculate modularity for each file
-    for subdir, dirs, paths in os.walk(root):
-        for path in paths:
-            if not path.endswith('.py') or 'test' in path:
-                continue
-
-            subdir = os.path.join(root, subdir)
-            path = os.path.join(subdir, path)
+    for subdir in files:
+        for path in subdir:
             fcalls = [c for c in _calls if c.endswith(path)]
             fdefs = [d for d in _definitions if d.endswith(path)]
 
@@ -130,8 +113,6 @@ def calculate_modularity(root, log=True):
 
     if log:
         print('-' * 50, end='\n\n')
-        print('Tested %d files' % _pathcount)
-        print('Failed %d files' % _errorcount)
         print('Overall modularity (avg):', average(_alllperc) * 100)
         print('Overall modularity (med):', median(_alllperc) * 100)
         print('Overall modularity (min):', min(_alllperc) * 100)
