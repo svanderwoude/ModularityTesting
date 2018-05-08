@@ -37,6 +37,7 @@ def calculate_volume(path):
             line = re.sub('[ \t\n]+', ' ', line)
             line_count = int(line.split(' ')[1])
             return line_count
+    return 0
 
 
 def calculate_maintainability(root, log=True):
@@ -50,7 +51,7 @@ def calculate_maintainability(root, log=True):
     # Set up function definitions and funciton calls for each file
     for subdir, dirs, paths in os.walk(root):
         for path in paths:
-            if not path.endswith('.py'):
+            if not path.endswith('.py') or 'test' in path:
                 continue
 
             subdir = os.path.join(root, subdir)
@@ -83,7 +84,8 @@ def calculate_maintainability(root, log=True):
         print('Overall volume (avg):', average(_all_volume))
         print('Overall volume (med):', median(_all_volume))
         print('Overall volume (min):', min(_all_volume))
-        print('Overall volume (max):', max(_all_volume), end='\n\n')
+        print('Overall volume (max):', max(_all_volume))
+        print('Overall volume (sum):', sum(_all_volume), end='\n\n')
 
     return ((average(_allperc_testcoverage), median(_allperc_testcoverage),
              min(_allperc_testcoverage), max(_allperc_testcoverage)),
