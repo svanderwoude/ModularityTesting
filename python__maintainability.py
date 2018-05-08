@@ -1,12 +1,26 @@
 # import coverage
 import os
-# import radon
+from radon.visitors import ComplexityVisitor
 import re
 import signal
 import subprocess
 
 from numpy import average
 from numpy.ma import median
+
+
+# https://www.sig.eu/wp-content/uploads/2016/10/APracticalModelForMeasuringMaintainability.pdf
+
+
+def calculate_complexity(path):
+    try:
+        with open(path) as file:
+            data = file.read()
+
+            v = ComplexityVisitor.from_code(data)
+            return v.complexity
+    except SyntaxError:
+        return -1
 
 
 def calculate_testcoverage(path):
@@ -45,18 +59,24 @@ def calculate_maintainability(files, log=True):
     _definitions = []
     _allperc_testcoverage = []
     _all_volume = []
+    _all_complexity = []
 
     # Set up function definitions and funciton calls for each file
     for subdir in files:
         for path in subdir:
             testcoverage = calculate_testcoverage(path)
             volume = calculate_volume(path)
+            complexity = calculate_complexity(path)
 
             _allperc_testcoverage.append(testcoverage)
             _all_volume.append(volume)
 
+            if complexity >= 0:
+                _all_complexity.append(complexity)
+
             if log:
                 print('FILE:', path)
+                print('Complexity:', complexity)
                 print('Test coverage:', testcoverage * 100)
                 print('Volume:', volume, end='\n\n')
 
@@ -74,8 +94,9 @@ def calculate_maintainability(files, log=True):
 
     return ((average(_allperc_testcoverage), median(_allperc_testcoverage),
              min(_allperc_testcoverage), max(_allperc_testcoverage)),
-            (average(_all_volume), median(_all_volume), min(_all_volume),
-             max(_all_volume)))
+            (sum(_all_volume), average(_all_volume), median(_all_volume),
+             min(_all_volume), max(_all_volume), _all_volume),
+            _all_complexity)
 
 
 if __name__ == '__main__':
