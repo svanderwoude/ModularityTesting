@@ -2,6 +2,7 @@ import os
 
 from python__maintainability import calculate_maintainability
 from python__modularity import calculate_modularity
+from python__modularity_index_validation import calculate_modularity as validate_modularity
 
 
 def section_header(section):
@@ -65,6 +66,11 @@ if __name__ == '__main__':
         '/home/svanderwoude/UvA/Thesis/Projects/python-trezor',
     ]
 
+    for root in roots:
+        files, zero_liners = setup_files(root)
+        modularity = validate_modularity(files, False)
+        print(root.split('/')[-1], modularity > 0.50, modularity)
+
     section_header('modularity')
 
     # for root in roots:
@@ -74,30 +80,62 @@ if __name__ == '__main__':
     #     print(root.split('/')[-1], mavg, mavg >= 0.575)
 
 
-    section_header('maintainability')
-    print('name', 'volume', 'small', 'medium', 'large', 'lowest', 'low', 'medium', 'high', end='\n\n')
+    # section_header('maintainability')
+    # print('name', 'volume', 'unit_size', 'complexity', end='\n\n')
 
-    for root in roots:
-        files, zero_liners = setup_files(root)
-        testcoverage, volume, complexity = calculate_maintainability(files, False)
+    # for root in roots:
+    #     files, zero_liners = setup_files(root)
+    #     testcoverage, volume, complexity = calculate_maintainability(files, False)
 
-        print(root.split('/')[-1], volume[0], end=' ')
+    #     # Volume
+    #     print(root.split('/')[-1], volume[0], end=' ')
 
-        small = [v for v in volume[5] if v <= 15]
-        medium = [v for v in volume[5] if v > 15 and v <= 30]
-        large = [v for v in volume[5] if v > 30]
+    #     # Unit size (using SIG Building Maintainable Software page 45). Look at adjusting percentages below 5 stars.
+    #     small = [v for v in volume[5] if v <= 15]
+    #     medium = [v for v in volume[5] if v > 15]
+    #     large = [v for v in volume[5] if v > 30]
+    #     very_large = [v for v in volume[5] if v > 60]
+    #     total = len(volume[5])
 
-        print(len(small) / len(volume[5]),
-              len(medium) / len(volume[5]),
-              len(large)/ len(volume[5]), end=' ')
+    #     small_perc = (len(small) / total) * 100
+    #     medium_perc = (len(medium) / total) * 100
+    #     large_perc = (len(large) / total) * 100
+    #     very_large_perc = (len(very_large) / total) * 100
+        
+    #     if small_perc >= 57.3 and medium_perc <= 43.7 and large_perc <= 22.3 and very_large_perc <= 6.9:
+    #         print(5, end=' ')
+    #     elif small_perc >= 50 and medium_perc <= 50 and large_perc <= 25 and very_large_perc <= 10:
+    #         print(4, end=' ')
+    #     elif small_perc >= 45 and medium_perc <= 55 and large_perc <= 30 and very_large_perc <= 12.5:
+    #         print(3, end=' ')
+    #     elif small_perc >= 40 and medium_perc <= 60 and large_perc <= 35 and very_large_perc <= 15:
+    #         print(2, end=' ')
+    #     else:
+    #         print(1, end=' ')
 
-        lowest = [c for c in complexity if c <= 10]
-        low = [c for c in complexity if c > 10 and c <= 20]
-        medium = [c for c in complexity if c > 21 and c <= 50]
-        high = [c for c in complexity if c > 50]
 
-        if len(complexity):
-            print(len(lowest) / len(complexity),
-                  len(low) / len(complexity),
-                  len(medium) / len(complexity),
-                  len(high) / len(complexity))
+    #     # Complexity
+    #     moderate = [c for c in complexity if c > 10 and c <= 20]
+    #     high = [c for c in complexity if c > 21 and c <= 50]
+    #     very_high = [c for c in complexity if c > 50]
+    #     total = len(complexity)
+        
+    #     try:
+    #         moderate_perc = (len(moderate) / total) * 100
+    #         high_perc = (len(high) / total) * 100
+    #         very_high_perc = (len(very_high) / total) * 100
+
+    #         if moderate_perc <= 25 and high_perc == 0 and very_high_perc == 0:
+    #             print(5, end=' ')
+    #         elif moderate_perc <= 30 and high_perc <= 5 and very_high_perc == 0:
+    #             print(4, end=' ')
+    #         elif moderate_perc <= 40 and high_perc <= 10 and very_high_perc == 0:
+    #             print(3, end=' ')
+    #         elif moderate_perc <= 50 and high_perc <= 15 and very_high_perc <= 5:
+    #             print(2, end=' ')
+    #         else:
+    #             print(1, end=' ')
+    #     except ZeroDivisionError:
+    #         print('N/A')
+
+    #     print('')
