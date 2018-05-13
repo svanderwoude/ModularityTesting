@@ -1,4 +1,5 @@
 import ast
+import math
 import os
 
 from numpy import average
@@ -15,15 +16,12 @@ def calculate_modularity(files, log=True):
             with open(path) as file:
                 try:
                     data = file.read()
-                    tree = ast.parse(data)
+                    tree = ast.parse(data, 'eval')
                 except SyntaxError:
                     continue
 
                 # Functions: the number of functions in module
                 functions = sum(isinstance(exp, ast.FunctionDef) for exp in tree.body)
-
-                if functions == 0:
-                    continue
 
                 fq = 0.172 * functions + 0.171 if functions <= 5 else pow(functions - 4.83, -2.739)
 

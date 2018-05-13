@@ -1,3 +1,4 @@
+import ast
 import os
 
 from python__maintainability import calculate_maintainability
@@ -12,6 +13,8 @@ def section_header(section):
 
 
 def setup_files(root):
+    count = 0
+    errors = 0
     files = []
     zero_liners = 0
 
@@ -24,22 +27,24 @@ def setup_files(root):
                 continue
 
             path = os.path.join(subdir, path)
+            count += 1
 
             try:
                 with open(path) as file:
                     data = file.read()
+                    ast.parse(data)
                     
                     if len(data):
                         subfiles.append(path)
                     else:
                         zero_liners += 1
             except:
-                pass
+                errors += 1
 
         if len(subfiles):
             files.append(subfiles)
 
-    return (files, zero_liners)
+    return (files, errors / count)
 
 
 if __name__ == '__main__':
@@ -66,18 +71,27 @@ if __name__ == '__main__':
         '/home/svanderwoude/UvA/Thesis/Projects/python-trezor',
     ]
 
-    for root in roots:
-        files, zero_liners = setup_files(root)
-        modularity = validate_modularity(files, False)
-        print(root.split('/')[-1], modularity > 0.50, modularity)
-
-    section_header('modularity')
-
     # for root in roots:
     #     files, zero_liners = setup_files(root)
-    #     mavg, mmed, mmin, mmax = calculate_modularity(files, False)
+    #     modularity = validate_modularity(files, False)
+    #     print(root.split('/')[-1], modularity > 0.575, modularity)
 
-    #     print(root.split('/')[-1], mavg, mavg >= 0.575)
+    section_header('modularity')
+    print('name', 'MI', 'Own')
+    discard_threshold = 0.15
+    threshold = 0.575
+
+    for root in roots:
+        files, fault_perc = setup_files(root)
+
+        if fault_perc > discard_threshold:
+            print(root.split('/')[-1], 'DISCARDED', 'DISCARDED')
+            continue
+
+        mavg = calculate_modularity(files, False)
+        mval = validate_modularity(files, False)
+
+        print(root.split('/')[-1], mval >= threshold, mavg >= threshold)
 
 
     # section_header('maintainability')

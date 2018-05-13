@@ -118,7 +118,7 @@ def calculate_modularity(files, log=True):
         print('Overall modularity (min):', min(_alllperc) * 100)
         print('Overall modularity (max):', max(_alllperc) * 100, end='\n\n')
 
-    return average(_alllperc), median(_alllperc), min(_alllperc), max(_alllperc)
+    return average(_alllperc)
 
 
 if __name__ == '__main__':
