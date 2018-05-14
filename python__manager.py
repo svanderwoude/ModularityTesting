@@ -77,33 +77,43 @@ if __name__ == '__main__':
         # '/home/svanderwoude/UvA/Thesis/Projects/aws-iot-device-sdk-python',
         # #  # '/home/svanderwoude/UvA/Thesis/Projects/azure-iot-sdk-python',
 
-        '/home/svanderwoude/UvA/Thesis/Projects/PiClock',
-        '/home/svanderwoude/UvA/Thesis/Projects/python-gpiozero',
-        '/home/svanderwoude/UvA/Thesis/Projects/goSecure',
-        '/home/svanderwoude/UvA/Thesis/Projects/audio-reactive-led-strip',
-        '/home/svanderwoude/UvA/Thesis/Projects/picamera',
+        # '/home/svanderwoude/UvA/Thesis/Projects/PiClock',
+        # '/home/svanderwoude/UvA/Thesis/Projects/python-gpiozero',
+        # '/home/svanderwoude/UvA/Thesis/Projects/goSecure',
+        # '/home/svanderwoude/UvA/Thesis/Projects/audio-reactive-led-strip',
+        # '/home/svanderwoude/UvA/Thesis/Projects/picamera',
+
+        '/home/svanderwoude/UvA/Thesis/Projects/cola',
+        '/home/svanderwoude/UvA/Thesis/Projects/demiurge',
+        '/home/svanderwoude/UvA/Thesis/Projects/feedparser',
+        '/home/svanderwoude/UvA/Thesis/Projects/grab',
+        '/home/svanderwoude/UvA/Thesis/Projects/MechanicalSoup',
+        #  # '/home/svanderwoude/UvA/Thesis/Projects/portia',
+        '/home/svanderwoude/UvA/Thesis/Projects/pyspider',
+        '/home/svanderwoude/UvA/Thesis/Projects/robobrowser',
+        '/home/svanderwoude/UvA/Thesis/Projects/scrapy',
     ]
 
 
-    section_header('modularity')
-    print('name,', 'Own Method,', 'MI,')
-    discard_threshold = 0.30
-    threshold = 0.575
+    # section_header('modularity')
+    # print('name,', 'Own Method,', 'MI,')
+    # discard_threshold = 0.30
+    # threshold = 0.575
 
     # for root in roots:
     #     files, fault_perc = setup_files(root)
 
     #     if fault_perc > discard_threshold:
-    #         # print('%s, %s, %s,' % (root.split('/')[-1], 'DISCARDED', 'DISCARDED'))
+    #         print('%s, %s, %s,' % (root.split('/')[-1], 'DISCARDED', 'DISCARDED'))
     #         continue
 
     #     mavg = calculate_modularity(files, False)
 
-    #     # print(root.split('/')[-1], (validate_modularity(files, False) * 10) / 2)
+    #     # print(root.split('/')[-1], (mavg * 10) / 2)
 
     #     mval = validate_modularity(files, False)
 
-    #     print('%s, %s, %s,' % (root.split('/')[-1], mval >= threshold, mavg >= threshold))
+        # print('%s, %s, %s,' % (root.split('/')[-1], mval >= threshold, mavg >= threshold))
 
 
     section_header('maintainability')
