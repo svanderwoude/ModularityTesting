@@ -77,26 +77,26 @@ if __name__ == '__main__':
     #     print(root.split('/')[-1], modularity > 0.575, modularity)
 
     section_header('modularity')
-    print('name', 'MI', 'Own')
-    discard_threshold = 0.15
+    print('name,', 'Own Method,', 'MI,')
+    discard_threshold = 0.30
     threshold = 0.575
 
     for root in roots:
         files, fault_perc = setup_files(root)
 
         if fault_perc > discard_threshold:
-            print(root.split('/')[-1], 'DISCARDED', 'DISCARDED')
+            print('%s, %s, %s,' % (root.split('/')[-1], 'DISCARDED', 'DISCARDED'))
             continue
 
         mavg = calculate_modularity(files, False)
         mval = validate_modularity(files, False)
 
-        print(root.split('/')[-1], mval >= threshold, mavg >= threshold)
+        print('%s, %s, %s,' % (root.split('/')[-1], mval >= threshold, mavg >= threshold))
 
 
     # section_header('maintainability')
     # print('name', 'volume', 'unit_size', 'complexity', end='\n\n')
-
+ 
     # for root in roots:
     #     files, zero_liners = setup_files(root)
     #     testcoverage, volume, complexity = calculate_maintainability(files, False)

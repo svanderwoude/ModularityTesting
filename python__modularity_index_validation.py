@@ -37,7 +37,6 @@ def calculate_modularity(files, log=True):
             # Module quality
             mq = ((locq + fq) / (2 * lcom4)) + 0.25
 
-            # print(locq, fq, mq)
             mqs.append(mq)
 
     if len(mqs):
