@@ -49,32 +49,40 @@ def setup_files(root):
 
 if __name__ == '__main__':
     roots = [
-        '/home/svanderwoude/UvA/Thesis/Projects/flask',
-        '/home/svanderwoude/UvA/Thesis/Projects/falcon',
-        '/home/svanderwoude/UvA/Thesis/Projects/bottle',
-        '/home/svanderwoude/UvA/Thesis/Projects/cherrypy',
-        '/home/svanderwoude/UvA/Thesis/Projects/klein',
-        '/home/svanderwoude/UvA/Thesis/Projects/aiohttp',
-        '/home/svanderwoude/UvA/Thesis/Projects/tornado',
-        '/home/svanderwoude/UvA/Thesis/Projects/webpy',
-        '/home/svanderwoude/UvA/Thesis/Projects/pyramid',
+        # '/home/svanderwoude/UvA/Thesis/Projects/flask',
+        # '/home/svanderwoude/UvA/Thesis/Projects/falcon',
+        # '/home/svanderwoude/UvA/Thesis/Projects/bottle',
+        # '/home/svanderwoude/UvA/Thesis/Projects/cherrypy',
+        # '/home/svanderwoude/UvA/Thesis/Projects/klein',
+        # '/home/svanderwoude/UvA/Thesis/Projects/aiohttp',
+        # '/home/svanderwoude/UvA/Thesis/Projects/tornado',
+        # '/home/svanderwoude/UvA/Thesis/Projects/webpy',
+        # '/home/svanderwoude/UvA/Thesis/Projects/pyramid',
 
-        '/home/svanderwoude/UvA/Thesis/Projects/crankycoin',
-        '/home/svanderwoude/UvA/Thesis/Projects/mmgen',
-        '/home/svanderwoude/UvA/Thesis/Projects/Piper',
-        '/home/svanderwoude/UvA/Thesis/Projects/dashman',
-        '/home/svanderwoude/UvA/Thesis/Projects/bcwallet',
-        '/home/svanderwoude/UvA/Thesis/Projects/encompass',
-        '/home/svanderwoude/UvA/Thesis/Projects/django-cc',
-        '/home/svanderwoude/UvA/Thesis/Projects/pywallet',
-        '/home/svanderwoude/UvA/Thesis/Projects/DarkWallet',
-        '/home/svanderwoude/UvA/Thesis/Projects/python-trezor',
+        # '/home/svanderwoude/UvA/Thesis/Projects/crankycoin',
+        # '/home/svanderwoude/UvA/Thesis/Projects/mmgen',
+        # '/home/svanderwoude/UvA/Thesis/Projects/Piper',
+        # '/home/svanderwoude/UvA/Thesis/Projects/dashman',
+        # '/home/svanderwoude/UvA/Thesis/Projects/bcwallet',
+        # '/home/svanderwoude/UvA/Thesis/Projects/encompass',
+        # '/home/svanderwoude/UvA/Thesis/Projects/django-cc',
+        # '/home/svanderwoude/UvA/Thesis/Projects/pywallet',
+        # '/home/svanderwoude/UvA/Thesis/Projects/DarkWallet',
+        # '/home/svanderwoude/UvA/Thesis/Projects/python-trezor',
+
+        '/home/svanderwoude/UvA/Thesis/Projects/iot',
+        '/home/svanderwoude/UvA/Thesis/Projects/home-assistant',
+        '/home/svanderwoude/UvA/Thesis/Projects/iot-1',
+        '/home/svanderwoude/UvA/Thesis/Projects/screenly-ose',
+        '/home/svanderwoude/UvA/Thesis/Projects/awesome-iot',
+        '/home/svanderwoude/UvA/Thesis/Projects/iot-python',
+        '/home/svanderwoude/UvA/Thesis/Projects/GrovePi',
+        '/home/svanderwoude/UvA/Thesis/Projects/iottoolkit',
+        '/home/svanderwoude/UvA/Thesis/Projects/iotedgedev',
+        '/home/svanderwoude/UvA/Thesis/Projects/aws-iot-device-sdk-python',
+        '/home/svanderwoude/UvA/Thesis/Projects/azure-iot-sdk-python',
     ]
-
-    # for root in roots:
-    #     files, zero_liners = setup_files(root)
-    #     modularity = validate_modularity(files, False)
-    #     print(root.split('/')[-1], modularity > 0.575, modularity)
+    
 
     section_header('modularity')
     print('name,', 'Own Method,', 'MI,')
