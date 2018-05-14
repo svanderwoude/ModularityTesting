@@ -1,4 +1,4 @@
-# import coverage
+import coverage
 import os
 from radon.visitors import ComplexityVisitor
 import re
@@ -36,7 +36,6 @@ def calculate_testcoverage(path):
 
     # cov.stop()
     # cov.save()
-    # return 'testing...'
     return 0
 
 

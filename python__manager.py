@@ -49,33 +49,39 @@ def setup_files(root):
 
 if __name__ == '__main__':
     roots = [
-        '/home/svanderwoude/UvA/Thesis/Projects/flask',
-        '/home/svanderwoude/UvA/Thesis/Projects/falcon',
-        '/home/svanderwoude/UvA/Thesis/Projects/bottle',
-        '/home/svanderwoude/UvA/Thesis/Projects/cherrypy',
-        '/home/svanderwoude/UvA/Thesis/Projects/klein',
-        '/home/svanderwoude/UvA/Thesis/Projects/aiohttp',
-        '/home/svanderwoude/UvA/Thesis/Projects/tornado',
-        '/home/svanderwoude/UvA/Thesis/Projects/webpy',
-        '/home/svanderwoude/UvA/Thesis/Projects/pyramid',
+        # '/home/svanderwoude/UvA/Thesis/Projects/flask',
+        # '/home/svanderwoude/UvA/Thesis/Projects/falcon',
+        # '/home/svanderwoude/UvA/Thesis/Projects/bottle',
+        # '/home/svanderwoude/UvA/Thesis/Projects/cherrypy',
+        # '/home/svanderwoude/UvA/Thesis/Projects/klein',
+        # '/home/svanderwoude/UvA/Thesis/Projects/aiohttp',
+        # '/home/svanderwoude/UvA/Thesis/Projects/tornado',
+        # '/home/svanderwoude/UvA/Thesis/Projects/webpy',
+        # '/home/svanderwoude/UvA/Thesis/Projects/pyramid',
 
-        '/home/svanderwoude/UvA/Thesis/Projects/crankycoin',
-        '/home/svanderwoude/UvA/Thesis/Projects/mmgen',
-        #  # '/home/svanderwoude/UvA/Thesis/Projects/Piper',
-        '/home/svanderwoude/UvA/Thesis/Projects/dashman',
-        '/home/svanderwoude/UvA/Thesis/Projects/bcwallet',
-        #  # '/home/svanderwoude/UvA/Thesis/Projects/encompass',
-        '/home/svanderwoude/UvA/Thesis/Projects/django-cc',
-        '/home/svanderwoude/UvA/Thesis/Projects/pywallet',
-        '/home/svanderwoude/UvA/Thesis/Projects/DarkWallet',
-        '/home/svanderwoude/UvA/Thesis/Projects/python-trezor',
+        # '/home/svanderwoude/UvA/Thesis/Projects/crankycoin',
+        # '/home/svanderwoude/UvA/Thesis/Projects/mmgen',
+        # #  # '/home/svanderwoude/UvA/Thesis/Projects/Piper',
+        # #  # '/home/svanderwoude/UvA/Thesis/Projects/dashman',
+        # '/home/svanderwoude/UvA/Thesis/Projects/bcwallet',
+        # #  # '/home/svanderwoude/UvA/Thesis/Projects/encompass',
+        # '/home/svanderwoude/UvA/Thesis/Projects/django-cc',
+        # '/home/svanderwoude/UvA/Thesis/Projects/pywallet',
+        # '/home/svanderwoude/UvA/Thesis/Projects/DarkWallet',
+        # '/home/svanderwoude/UvA/Thesis/Projects/python-trezor',
 
-        '/home/svanderwoude/UvA/Thesis/Projects/screenly-ose',
-        '/home/svanderwoude/UvA/Thesis/Projects/iot-python',
-        '/home/svanderwoude/UvA/Thesis/Projects/GrovePi',
-        '/home/svanderwoude/UvA/Thesis/Projects/iotedgedev',
-        '/home/svanderwoude/UvA/Thesis/Projects/aws-iot-device-sdk-python',
-        '/home/svanderwoude/UvA/Thesis/Projects/azure-iot-sdk-python',
+        # '/home/svanderwoude/UvA/Thesis/Projects/screenly-ose',
+        # '/home/svanderwoude/UvA/Thesis/Projects/iot-python',
+        # #  # '/home/svanderwoude/UvA/Thesis/Projects/GrovePi',
+        # '/home/svanderwoude/UvA/Thesis/Projects/iotedgedev',
+        # '/home/svanderwoude/UvA/Thesis/Projects/aws-iot-device-sdk-python',
+        # #  # '/home/svanderwoude/UvA/Thesis/Projects/azure-iot-sdk-python',
+
+        '/home/svanderwoude/UvA/Thesis/Projects/PiClock',
+        '/home/svanderwoude/UvA/Thesis/Projects/python-gpiozero',
+        '/home/svanderwoude/UvA/Thesis/Projects/goSecure',
+        '/home/svanderwoude/UvA/Thesis/Projects/audio-reactive-led-strip',
+        '/home/svanderwoude/UvA/Thesis/Projects/picamera',
     ]
 
 
@@ -88,10 +94,13 @@ if __name__ == '__main__':
     #     files, fault_perc = setup_files(root)
 
     #     if fault_perc > discard_threshold:
-    #         print('%s, %s, %s,' % (root.split('/')[-1], 'DISCARDED', 'DISCARDED'))
+    #         # print('%s, %s, %s,' % (root.split('/')[-1], 'DISCARDED', 'DISCARDED'))
     #         continue
 
     #     mavg = calculate_modularity(files, False)
+
+    #     # print(root.split('/')[-1], (validate_modularity(files, False) * 10) / 2)
+
     #     mval = validate_modularity(files, False)
 
     #     print('%s, %s, %s,' % (root.split('/')[-1], mval >= threshold, mavg >= threshold))
@@ -107,7 +116,7 @@ if __name__ == '__main__':
         print(root.split('/')[-1], end=' ')
 
         # Volume
-        # print(root.split('/')[-1], volume[0], end=' ')
+        print(root.split('/')[-1], volume[0], end=' ')
 
         if volume[0] <= 66000:
             print(5, end=' ')
