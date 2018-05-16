@@ -76,7 +76,6 @@ if __name__ == '__main__':
         # '/home/svanderwoude/UvA/Thesis/Projects/iotedgedev',
         # '/home/svanderwoude/UvA/Thesis/Projects/aws-iot-device-sdk-python',
         # #  # '/home/svanderwoude/UvA/Thesis/Projects/azure-iot-sdk-python',
-
         # '/home/svanderwoude/UvA/Thesis/Projects/PiClock',
         # '/home/svanderwoude/UvA/Thesis/Projects/python-gpiozero',
         # '/home/svanderwoude/UvA/Thesis/Projects/goSecure',
