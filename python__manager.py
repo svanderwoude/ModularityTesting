@@ -164,7 +164,7 @@ if __name__ == '__main__':
 
         # Complexity
         moderate = [c for c in complexity if c > 10 and c <= 20]
-        high = [c for c in complexity if c > 21 and c <= 50]
+        high = [c for c in complexity if c > 20 and c <= 50]
         very_high = [c for c in complexity if c > 50]
         total = len(complexity)
         

@@ -1,5 +1,6 @@
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.lang.*;
 import java.util.*;
 import java.util.regex.Pattern;
@@ -26,14 +27,47 @@ public class MyModularity{
                 "spark",
         };
 
+        System.out.println("Project, Volume, Unit Size, Complexity");
+
         for(String path : paths) {
             File root = new File("/home/svanderwoude/UvA/Thesis/Projects/java/"+path+"/");
             List<File> files = getFiles(root);
+
+            // Complexity
+            List<Integer> complexities = getComplexity(files);
+            int low = 0, medium = 0, high = 0;
+            int complexity_score = 0;
+            float total = (float) complexities.size();
+
+            for(Integer com : complexities){
+                if(com > 10 && com <= 20) {
+                    low++;
+                }else if(com > 20 && com <= 50){
+                    medium++;
+                }else if(com > 50){
+                    high++;
+                }
+            }
+
+            if(low / total <= 0.25 && medium == 0 && high == 0){
+                complexity_score = 5;
+            }else if(low / total <= 0.30 && medium / total <= 0.05 && high == 0){
+                complexity_score = 4;
+            }else if(low / total <= 0.40 && medium / total <= 0.10 && high == 0){
+                complexity_score = 3;
+            }else if(low / total <= 0.50 && medium / total <= 0.15 && high / total <= 0.05){
+                complexity_score = 2;
+            }else{
+                complexity_score = 1;
+            }
+
+            // Unit size / volume
             List<Integer> volumes = getVolume(files);
             int totalvolume = volumes.stream().mapToInt(Integer::intValue).sum();
-            int small = 0, medium = 0, large = 0, very_large = 0;
+            int small = 0, large = 0, very_large = 0;
+            medium = 0;
             int unit_score = 0;
-            float total = (float) volumes.size();
+            total = (float) volumes.size();
 
             for(Integer vol : volumes){
                 if(vol <= 15){
@@ -64,7 +98,7 @@ public class MyModularity{
 
             if(files.size() > 0){
                 double modularity = calculateModularity(files);
-                System.out.println(path + ": " + modularity + " " + totalvolume + " " + unit_score);
+                System.out.println(path + ": " + modularity + " " + totalvolume + " " + unit_score + " " + complexity_score);
             }else{
                 System.out.println(path + ": DISCARDED");
             }
@@ -109,6 +143,41 @@ public class MyModularity{
         }
 
         return files;
+    }
+
+    private static List<Integer> getComplexity(List<File> files){
+        List<Integer> complexities = new ArrayList<>();
+        String[] keywords = {"if","else","while","case","for","switch","do","continue","break","&&","||","?",":","catch","finally","throw","throws","default","return"};
+
+        for(File file : files){
+            int complexity = 0;
+
+            try{
+                Scanner sc = new Scanner(file);
+                String line = "";
+                String words = "";
+
+                while(sc.hasNextLine()) {
+                    line = sc.nextLine();
+
+                    StringTokenizer stTokenizer = new StringTokenizer(line);
+
+                    while(stTokenizer.hasMoreTokens()) {
+                        words = stTokenizer.nextToken();
+
+                        for (int i = 0; i < keywords.length; i++) {
+                            if (keywords[i].equals(words)) {
+                                complexity++;
+                            }
+                        }
+                    }
+                }
+            }catch(IOException e){ }
+
+            complexities.add(complexity);
+        }
+
+        return complexities;
     }
 
     private static List<Integer> getVolume(List<File> files){
