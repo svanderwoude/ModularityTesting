@@ -5,7 +5,7 @@ import java.lang.*;
 import java.util.*;
 
 
-public class MyModularity{
+public class Main{
     public static void main(String[] args){
         File root = new File(".");
         calculateModularity(getFiles(root));
@@ -25,14 +25,14 @@ public class MyModularity{
             if(file.isDirectory()){
                 files.addAll(getFiles(file));
             }else if(fileExtension(file).equals("java") &&
-                     !file.getAbsolutePath().contains("test")){
+                    !file.getAbsolutePath().contains("test")){
                 try{
                     Scanner sc = new Scanner(file);
 
                     if(sc.hasNextLine()){
                         files.add(file);
                     }
-                    
+
                 }catch(FileNotFoundException e){ }
             }
         }
