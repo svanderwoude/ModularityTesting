@@ -82,37 +82,42 @@ if __name__ == '__main__':
         # '/home/svanderwoude/UvA/Thesis/Projects/audio-reactive-led-strip',
         # '/home/svanderwoude/UvA/Thesis/Projects/picamera',
 
-        '/home/svanderwoude/UvA/Thesis/Projects/cola',
-        '/home/svanderwoude/UvA/Thesis/Projects/demiurge',
-        '/home/svanderwoude/UvA/Thesis/Projects/feedparser',
-        '/home/svanderwoude/UvA/Thesis/Projects/grab',
-        '/home/svanderwoude/UvA/Thesis/Projects/MechanicalSoup',
-        #  # '/home/svanderwoude/UvA/Thesis/Projects/portia',
-        '/home/svanderwoude/UvA/Thesis/Projects/pyspider',
-        '/home/svanderwoude/UvA/Thesis/Projects/robobrowser',
-        '/home/svanderwoude/UvA/Thesis/Projects/scrapy',
+        # '/home/svanderwoude/UvA/Thesis/Projects/cola',
+        # '/home/svanderwoude/UvA/Thesis/Projects/demiurge',
+        # '/home/svanderwoude/UvA/Thesis/Projects/feedparser',
+        # '/home/svanderwoude/UvA/Thesis/Projects/grab',
+        # '/home/svanderwoude/UvA/Thesis/Projects/MechanicalSoup',
+        # #  # '/home/svanderwoude/UvA/Thesis/Projects/portia',
+        # '/home/svanderwoude/UvA/Thesis/Projects/pyspider',
+        # '/home/svanderwoude/UvA/Thesis/Projects/robobrowser',
+        # '/home/svanderwoude/UvA/Thesis/Projects/scrapy',
+
+        # '/home/svanderwoude/UvA/Thesis/Projects/gain',
+        # '/home/svanderwoude/UvA/Thesis/Projects/xcrawler',
+        # '/home/svanderwoude/UvA/Thesis/Projects/crawlerino',
+        '/home/svanderwoude/UvA/Thesis/Projects/Zeek',
     ]
 
 
-    # section_header('modularity')
-    # print('name,', 'Own Method,', 'MI,')
-    # discard_threshold = 0.30
-    # threshold = 0.575
+    section_header('modularity')
+    print('name,', 'Own Method,', 'MI,')
+    discard_threshold = 0.30
+    threshold = 0.575
 
-    # for root in roots:
-    #     files, fault_perc = setup_files(root)
+    for root in roots:
+        files, fault_perc = setup_files(root)
 
-    #     if fault_perc > discard_threshold:
-    #         print('%s, %s, %s,' % (root.split('/')[-1], 'DISCARDED', 'DISCARDED'))
-    #         continue
+        if fault_perc > discard_threshold:
+            print('%s, %s, %s,' % (root.split('/')[-1], 'DISCARDED', 'DISCARDED'))
+            continue
 
-    #     mavg = calculate_modularity(files, False)
+        mavg = calculate_modularity(files, False)
 
-    #     # print(root.split('/')[-1], (mavg * 10) / 2)
+        print(root.split('/')[-1], (mavg * 10) / 2)
 
-    #     mval = validate_modularity(files, False)
+        mval = validate_modularity(files, False)
 
-        # print('%s, %s, %s,' % (root.split('/')[-1], mval >= threshold, mavg >= threshold))
+        print('%s, %s, %s,' % (root.split('/')[-1], mval >= threshold, mavg >= threshold))
 
 
     section_header('maintainability')

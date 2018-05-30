@@ -27,7 +27,7 @@ public class MyModularity{
                 "spark",
         };
 
-        System.out.println("Project, Volume, Unit Size, Complexity");
+        System.out.println("Project, Modularity, Volume, Unit Size, Complexity");
 
         for(String path : paths) {
             File root = new File("/home/svanderwoude/UvA/Thesis/Projects/java/"+path+"/");
@@ -98,7 +98,8 @@ public class MyModularity{
 
             if(files.size() > 0){
                 double modularity = calculateModularity(files);
-                System.out.println(path + ": " + modularity + " " + totalvolume + " " + unit_score + " " + complexity_score);
+
+                System.out.println(path + ": " + (((modularity * 10) / 2) + 1) + " " + totalvolume + " " + unit_score + " " + complexity_score);
             }else{
                 System.out.println(path + ": DISCARDED");
             }

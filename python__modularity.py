@@ -122,4 +122,4 @@ def calculate_modularity(files, log=True):
 
 
 if __name__ == '__main__':
-    calculate_modularity('/home/svanderwoude/UvA/Thesis/repos/')
+    calculate_modularity('/home/svanderwoude/UvA/Thesis/Projects/gain/')
