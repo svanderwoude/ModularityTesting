@@ -95,7 +95,11 @@ if __name__ == '__main__':
         # '/home/svanderwoude/UvA/Thesis/Projects/gain',
         # '/home/svanderwoude/UvA/Thesis/Projects/xcrawler',
         # '/home/svanderwoude/UvA/Thesis/Projects/crawlerino',
-        '/home/svanderwoude/UvA/Thesis/Projects/Zeek',
+        # '/home/svanderwoude/UvA/Thesis/Projects/Zeek',
+        '/home/svanderwoude/UvA/Thesis/Projects/creepy',
+        '/home/svanderwoude/UvA/Thesis/Projects/pholcidae',
+        '/home/svanderwoude/UvA/Thesis/Projects/crawler4py',
+        '/home/svanderwoude/UvA/Thesis/Projects/crawler-1',
     ]
 
 
@@ -113,11 +117,11 @@ if __name__ == '__main__':
 
         mavg = calculate_modularity(files, False)
 
-        print(root.split('/')[-1], (mavg * 10) / 2)
+        print(root.split('/')[-1], mavg, (mavg * 10) / 2)
 
-        mval = validate_modularity(files, False)
+        # mval = validate_modularity(files, False)
 
-        print('%s, %s, %s,' % (root.split('/')[-1], mval >= threshold, mavg >= threshold))
+        # print('%s, %s, %s,' % (root.split('/')[-1], mval >= threshold, mavg >= threshold))
 
 
     section_header('maintainability')
