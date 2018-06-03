@@ -257,8 +257,8 @@ One of the main code quality characteristics is maintainability. As we have seen
 \centering
 \caption{Maintainability characteristics and calculation weights}
 \label{table:maintainability-weights}
-\begin{tabular}{l|lllll}
-                        & \textbf{Analysability} & \textbf{Changeability} & \textbf{Modularity} & \textbf{Re-usability} & \textbf{Testability} \\ \hline
+\begin{tabular}{llllll}
+                        & \textbf{Analysability} & \textbf{Changeability} & \textbf{Modularity} & \textbf{Re-usability} & \textbf{Testability} \\
 \textbf{Complexity}     & -                      & 4                      & -                   & 3                     & 4                    \\
 \textbf{Duplication}    & 3                      & 3                      & -                   & -                     & -                    \\
 \textbf{Function calls} & -                      & -                      & 1                   & -                     & -                    \\
@@ -294,8 +294,7 @@ In order to measure the resource utilization we will run each program with the b
 Experiments will be done on projects of two programming languages: Python and Java. As we have seen above, some experiments require static program analysis, whilst others require dynamic program analysis. This requires us to use suitable projects that meet our requirements.
 
 \section{Python experiments}
-\todo{Update when finished completely}
-Our Python test suite consists of a total of 41 projects. These projects are all categorized and used in different experiments, below an overview of the experiments and used projects.
+Our Python test suite consists of a total of 39 projects. These projects are all categorized and used in different experiments, below an overview of the experiments and used projects.
 
 \myparagraph{Method validation}
 In the modularity calculation method validation we will make use of 31 Python projects. These projects consist of nine micro web frameworks, seven cryptocurrency related projects and seven IoT projects. The remaining test projects are web crawlers.
@@ -304,8 +303,7 @@ In the modularity calculation method validation we will make use of 31 Python pr
 After the validation, 41 Python projects are used to do experiments on the relation between modularity and maintainability.
 
 \myparagraph{Modularity vs. Performance efficiency}
-\todo[inline]{This is likely to change (number of projects)}
-Measuring the differences in performance efficiency between multiple projects with a different modularity score requires a set of projects with the same functionality. Therefore the test suite will consist of 18 web crawlers written in Python.
+Measuring the differences in performance efficiency between multiple projects with a different modularity score requires a set of projects with the same functionality. Therefore the test suite will consist of 11 web crawlers written in Python.
 
 \section{Java experiments}
 \todo{Insert once Java test have been executed}
@@ -326,68 +324,95 @@ Whilst static program analysis is generally not influenced by the operating syst
 
 \chapter{Results}
 \section{Modularity}
+\myparagraph{Dependency measuring method validation}
+As we can see in table \ref{table:validation}, our method produces the same result as the method using the Modularity Index in almost 75\% of all cases. Even though this isn't the ideal value, we can see that this percentage is almost the same for the Modularity Index vs. Better Code Hub approach. We can therefore conclude that even though our method doesn't fully align with neither the Modularity Index nor the Better Code Hub approach, it can be considered correct. One reason why we can say this is because of the flaws we found in both existing approaches. The flaw of the approach taken by Better Code Hub is that the main characteristics of a module are not taken in to account when computing the modularity (score). The Modularity Index, on the other hand, seems to be too complex, making it less reliable. This can be seen when looking at a formally fully modular program (for example a program with just one file in Python). When calculating the modularity using the Modularity Index approach this will produce a result stating that the program is not 100\% modular, even though it is. This is partially due to the fact that this method was originally developed for Java systems, which officially defines a module on a bigger scale than Python.
 
 \begin{table}[H]
 \centering
 \caption{Method validation results on 31 Python repositories}
 \label{table:validation}
-\begin{tabular}{l|lll}
-\textbf{}                         & \textbf{Own vs. MI} & \textbf{Own vs. BCH} & \textbf{MI vs. BCH} \\ \hline
+\begin{tabular}{llll}
+\textbf{}                         & \textbf{Own vs. MI} & \textbf{Own vs. BCH} & \textbf{MI vs. BCH} \\ 
 \textbf{False positives}          & 4                   & 5                    & 2                   \\
 \textbf{False negatives}          & 4                   & 8                    & 5                   \\
 \textbf{Corresponding percentage} & 74.2\%              & 58.1\%               & 77.4\%             
 \end{tabular}
 \end{table}
 
-\myparagraph{Dependency measuring method validation}
-As we can see in table \ref{table:validation}, our method produces the same result as the method using the Modularity Index in almost 75\% of all cases. Even though this isn't the ideal value, we can see that this percentage is almost the same for the Modularity Index vs. Better Code Hub approach. We can therefore conclude that even though our method doesn't fully align with neither the Modularity Index nor the Better Code Hub approach, it can be considered correct. One reason why we can say this is because of the flaws we found in both existing approaches. The flaw of the approach taken by Better Code Hub is that the main characteristics of a module are not taken in to account when computing the modularity (score). The Modularity Index, on the other hand, seems to be too complex, making it less reliable. This can be seen when looking at a formally fully modular program (for example a program with just one file in Python). When calculating the modularity using the Modularity Index approach this will produce a result stating that the program is not 100\% modular, even though it is. This is partially due to the fact that this method was originally developed for Java systems, which officially defines a module on a bigger scale than Python.
-
 \section{Maintainability}
-\todo[inline]{Add more / update results, explanation and discussion for sub-characteristics and maintainability}
-Maintainability consists of five sub-characteristics, which were all tested for the 31 projects mentioned before. For each of the sub-characteristics (excluding modularity) a scatter chart was created to visualize the results and find a trend line for supporting the results. The results for each sub-characteristic are discussed below.
+Maintainability consists of five sub-characteristics, which were all calculated for each of the projects in our test set. For each of the sub-characteristics (excluding modularity) a scatter chart was created to visualize their relation to modularity and find a trend line supporting the results. The results for each sub-characteristic are discussed below.
 
 \myparagraph{Analysability}
 \begin{figure}[H]
     \caption{Modularity vs. Analysability results}
+    \label{figure:mod-analysis}
     \centering
         \includegraphics[width=0.70\textwidth]{modularity-analysability}
 \end{figure}
 
+As we can see from figure \ref{figure:mod-analysis} there is almost no correlation between the modularity and analysability of a program. The results show us that most data-points follow the trend-line with no real outliers. Looking at the Pearson coefficient for this relation, we can see that the value of -0.151 indicates a slight negative correlation between the two characteristics.
+
 \myparagraph{Changeability}
 \begin{figure}[H]
     \caption{Modularity vs. Changeability results}
+    \label{figure:mod-change}
     \centering
         \includegraphics[width=0.70\textwidth]{modularity-changeability}
 \end{figure}
 
+The results of this test, see in figure \ref{figure:mod-change}, show a clear positive correlation between modularity and changeability. With a Pearson coefficient of 0.460 this correlation is quite substantial. 
+
 \myparagraph{Re-usability}
 \begin{figure}[H]
     \caption{Modularity vs. Re-usability results}
+    \label{figure:mod-reuse}
     \centering
         \includegraphics[width=0.70\textwidth]{modularity-reusability}
 \end{figure}
 
+Figure \ref{figure:mod-reuse} shows us that there is quite a large standard deviation in the re-usability scores of our test suite. The standard deviation we found is 0.481, which is less compact than the standard deviations of for example the analysability (0.210) and changeability (0.325). We can see a slight positive correlation between the modularity and re-usability of a program, which is supported by a Pearson coefficient of 0.171.
+
 \myparagraph{Testability}
 \begin{figure}[H]
     \caption{Modularity vs. Testability results}
+    \label{figure:mod-test}
     \centering
         \includegraphics[width=0.70\textwidth]{modularity-testability}
 \end{figure}
 
+The relation between modularity and testability appears to be slightly positive. With a Pearson coefficient of 0.278 this correlation is stronger than that of the re-usability mentioned above, which also has a higher standard deviation. Figure \ref{figure:mod-test} shows the relation using our test suite.
+
+\myparagraph{Overall}
 \begin{figure}[H]
-    \label{figure:mod-main}
     \caption{Modularity vs. Maintainability results}
+    \label{figure:mod-main}
     \centering
         \includegraphics[width=0.65\textwidth]{modularity-maintainability}
 \end{figure}
 
-\myparagraph{Overall}
-\todo{Move to paragraphs above and extend with pearson coefficient}
-These charts tell us that modularity does not have any substantial impact on the analysability of a program, whilst the other characteristics - changeability, re-usability and testability - do have a positive correlation with the degree of modularity. If we combine these results using a weighted average we get the overall maintainability scores, see figure \ref{figure:mod-main}. As we can see, an increased degree of modularity causes the maintainability to also increase. Using these results we can say that modularity has a positive effect on the maintainability of a program.
+If we combine these results using a weighted average we get the overall maintainability scores, see figure \ref{figure:mod-main}. As we can see, an increased degree of modularity causes the maintainability to also increase. Using these results we can say that modularity has a positive effect on the maintainability of a program. With a Pearson coefficient of 0.537 this correlation is really strong, without having many outliers.
+
+\myparagraph{Overview}
+Table \ref{table:main-overview} contains the results for all tested characteristics involved with maintainability. We can see that most relations show a positive Pearson coefficient, except for analysability. Since the standard deviation is quite low for most relations, the correlation results are quite strong and could be applied to a more broad sense.
+
+\begin{table}[H]
+\centering
+\caption{Overview of maintainability characteristic results}
+\label{table:main-overview}
+\begin{tabular}{lll}
+                         & \textbf{Pearson Coefficient} & \textbf{Standard Deviation} \\
+\textbf{Analysability}   & -0.151                       & 0.202                       \\
+\textbf{Changeability}   & 0.457                        & 0.325                       \\
+\textbf{Re-usability}    & 0.171                        & 0.481                       \\
+\textbf{Testability}     & 0.278                        & 0.349                       \\
+\textbf{Maintainability} & 0.537                        & 0.277                      
+\end{tabular}
+\end{table}
 
 \section{Performance efficiency}
+The two sub-characteristics of performance efficiency we have tested are resource utilization and time behavior. For both characteristics we calculated the relation to modularity and plotted the results in a scatter plot. The results are discussed below.
+
 \myparagraph{Resource utilization}
-Appears to be a relation - more modular = more memory usage. But not that many data points.
 \begin{figure}[H]
     \label{figure:perf-res}
     \caption{Modularity vs. Resource utilization results}
@@ -395,14 +420,38 @@ Appears to be a relation - more modular = more memory usage. But not that many d
         \includegraphics[width=0.65\textwidth]{modularity-resourceutilization}
 \end{figure}
 
+Figure \ref{figure:perf-res} shows that our data appears to be far apart. With a standard deviation of over 13000kb we can conclude that the differences between are very large, no matter the modularity score. However, with a Pearson coefficient of 0.287 we can see that there is positive correlation between the modularity and resource utilization of a program.
+
 \myparagraph{Time behavior}
-No relation.
 \begin{figure}[H]
     \label{figure:perf-time}
     \caption{Modularity vs. Time behavior results}
     \centering
         \includegraphics[width=0.65\textwidth]{modularity-timebehavior}
 \end{figure}
+
+The results seen in figure \ref{figure:perf-time} show that there is almost no correlation between modularity and execution speed. We can see that there is one big outlier which influences the data a lot. With this data point included we get a Pearson coefficient of just -0.015, and a standard deviation of 0.497. However, if we would remove this outlier, we get the results shown in figure \ref{figure:perf-time-no}. This figure shows all execution differences on a smaller scale. Using these results we get a Pearson coefficient of 0.169, which indicates a slightly positive correlation between the characteristics.
+
+\begin{figure}[H]
+    \label{figure:perf-time-no}
+    \caption{Modularity vs. Time behavior results (without outlier)}
+    \centering
+        \includegraphics[width=0.65\textwidth]{modularity-timebehavior-nooutlier}
+\end{figure}
+
+\myparagraph{Overview}
+Table \ref{table:perf-overview} contains the results for all performance efficiency characteristics that we have tested. We can see that the relations are both positive, meaning that a more modular program is likely to use more memory and take more time to execute.
+
+\begin{table}[H]
+\centering
+\caption{Overview of performance efficiency characteristics results}
+\label{table:perf-overview}
+\begin{tabular}{lll}
+                              & \textbf{Pearson Coefficient} & \textbf{Standard Deviation} \\
+\textbf{Resource Utilization} & 0.287                        & 13183                       \\
+\textbf{Time Behavior}        & 0.169                        & 0.099                      
+\end{tabular}
+\end{table}
 
 \chapter{Discussion}
 \todo{Answer research question; speculative :)}
