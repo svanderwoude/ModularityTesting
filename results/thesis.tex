@@ -350,7 +350,7 @@ Maintainability consists of five sub-characteristics, which were all calculated 
         \includegraphics[width=0.70\textwidth]{modularity-analysability}
 \end{figure}
 
-As we can see from figure \ref{figure:mod-analysis} there is almost no correlation between the modularity and analysability of a program. The results show us that most data-points follow the trend-line with no real outliers. Looking at the Pearson coefficient for this relation, we can see that the value of -0.151 indicates a slight negative correlation between the two characteristics.
+As we can see from figure \ref{figure:mod-analysis} there is almost no correlation between the modularity and analysability of a program. The results show us that most data-points follow the trend-line with no real outliers. Looking at the Pearson coefficient for this relation, we can see that the value of -0.163 indicates a slight negative correlation between the two characteristics.
 
 \myparagraph{Changeability}
 \begin{figure}[H]
@@ -360,7 +360,7 @@ As we can see from figure \ref{figure:mod-analysis} there is almost no correlati
         \includegraphics[width=0.70\textwidth]{modularity-changeability}
 \end{figure}
 
-The results of this test, see in figure \ref{figure:mod-change}, show a clear positive correlation between modularity and changeability. With a Pearson coefficient of 0.460 this correlation is quite substantial. 
+The results of this test, see in figure \ref{figure:mod-change}, show a clear positive correlation between modularity and changeability. With a Pearson coefficient of 0.457 this correlation is quite substantial. 
 
 \myparagraph{Re-usability}
 \begin{figure}[H]
@@ -370,7 +370,7 @@ The results of this test, see in figure \ref{figure:mod-change}, show a clear po
         \includegraphics[width=0.70\textwidth]{modularity-reusability}
 \end{figure}
 
-Figure \ref{figure:mod-reuse} shows us that there is quite a large standard deviation in the re-usability scores of our test suite. The standard deviation we found is 0.481, which is less compact than the standard deviations of for example the analysability (0.210) and changeability (0.325). We can see a slight positive correlation between the modularity and re-usability of a program, which is supported by a Pearson coefficient of 0.171.
+Figure \ref{figure:mod-reuse} shows us that there is quite a large standard deviation in the re-usability scores of our test suite. The standard deviation we found is 0.525, which is less compact than the standard deviations of for example the analysability (0.207) and changeability (0.325). We can see a slight positive correlation between the modularity and re-usability of a program, which is supported by a Pearson coefficient of 0.137.
 
 \myparagraph{Testability}
 \begin{figure}[H]
@@ -380,7 +380,7 @@ Figure \ref{figure:mod-reuse} shows us that there is quite a large standard devi
         \includegraphics[width=0.70\textwidth]{modularity-testability}
 \end{figure}
 
-The relation between modularity and testability appears to be slightly positive. With a Pearson coefficient of 0.278 this correlation is stronger than that of the re-usability mentioned above, which also has a higher standard deviation. Figure \ref{figure:mod-test} shows the relation using our test suite.
+The relation between modularity and testability appears to be slightly positive. With a Pearson coefficient of 0.251 this correlation is stronger than that of the re-usability mentioned above, which also has a higher standard deviation. Figure \ref{figure:mod-test} shows the relation using our test suite.
 
 \myparagraph{Overall}
 \begin{figure}[H]
@@ -390,7 +390,7 @@ The relation between modularity and testability appears to be slightly positive.
         \includegraphics[width=0.65\textwidth]{modularity-maintainability}
 \end{figure}
 
-If we combine these results using a weighted average we get the overall maintainability scores, see figure \ref{figure:mod-main}. As we can see, an increased degree of modularity causes the maintainability to also increase. Using these results we can say that modularity has a positive effect on the maintainability of a program. With a Pearson coefficient of 0.537 this correlation is really strong, without having many outliers.
+If we combine these results using a weighted average we get the overall maintainability scores, see figure \ref{figure:mod-main}. As we can see, an increased degree of modularity causes the maintainability to also increase. Using these results we can say that modularity has a positive effect on the maintainability of a program. With a Pearson coefficient of 0.521 this correlation is really strong, without having many outliers.
 
 \myparagraph{Overview}
 Table \ref{table:main-overview} contains the results for all tested characteristics involved with maintainability. We can see that most relations show a positive Pearson coefficient, except for analysability. Since the standard deviation is quite low for most relations, the correlation results are quite strong and could be applied to a more broad sense.
@@ -401,11 +401,11 @@ Table \ref{table:main-overview} contains the results for all tested characterist
 \label{table:main-overview}
 \begin{tabular}{lll}
                          & \textbf{Pearson Coefficient} & \textbf{Standard Deviation} \\
-\textbf{Analysability}   & -0.151                       & 0.202                       \\
+\textbf{Analysability}   & -0.163                       & 0.207                       \\
 \textbf{Changeability}   & 0.457                        & 0.325                       \\
-\textbf{Re-usability}    & 0.171                        & 0.481                       \\
-\textbf{Testability}     & 0.278                        & 0.349                       \\
-\textbf{Maintainability} & 0.537                        & 0.277                      
+\textbf{Re-usability}    & 0.137                        & 0.525                       \\
+\textbf{Testability}     & 0.251                        & 0.365                       \\
+\textbf{Maintainability} & 0.521                        & 0.277                      
 \end{tabular}
 \end{table}
 
