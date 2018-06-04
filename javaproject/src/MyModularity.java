@@ -17,14 +17,21 @@ import com.github.javaparser.ast.visitor.VoidVisitorAdapter;
 public class MyModularity{
     public static void main(String[] args){
         String paths[] = {
-                "dropwizard",
-                "iot-2",
-                "iot-3",
-                "iot-starterkit",
-                "light-rest-4j",
-                "mirror",
-                "ninja",
-                "spark",
+//                "dropwizard",
+//                "iot-2",
+//                "iot-3",
+//                "iot-starterkit",
+//                "light-rest-4j",
+//                "mirror",
+//                "ninja",
+//                "spark",
+                "webmagic",
+                "crawler4j",
+                "WebCollector",
+                "heritrix3",
+                "crawler-2",
+                "gecco",
+                "java-web-crawler",
         };
 
         System.out.println("Project, Modularity, Volume, Unit Size, Complexity");
@@ -98,8 +105,9 @@ public class MyModularity{
 
             if(files.size() > 0){
                 double modularity = calculateModularity(files);
+                // (((modularity * 10) / 2) + 1)
 
-                System.out.println(path + ": " + (((modularity * 10) / 2) + 1) + " " + totalvolume + " " + unit_score + " " + complexity_score);
+                System.out.println(path + ": " + (modularity > 0.575) + " " + totalvolume + " " + unit_score + " " + complexity_score);
             }else{
                 System.out.println(path + ": DISCARDED");
             }
