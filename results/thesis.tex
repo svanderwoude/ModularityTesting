@@ -418,11 +418,13 @@ If we combine these results using a weighted average we get the overall maintain
 
 
 \subsection{Overview}
-Table \ref{table:main-overview} contains the results for all tested characteristics involved with maintainability. We can see that most relations show a positive Pearson coefficient, except for analysability. Since the standard deviation is quite low for most relations, the correlation results are quite strong and could be applied to a more broad sense.
+Table \ref{table:main-overview} contains the results for all tested characteristics involved with maintainability in Python. We can see that most relations show a positive Pearson coefficient, except for analysability. Since the standard deviation is quite low for most relations, the correlation results are quite strong and could be applied to a more broad sense.\\
+
+All test results from characteristics related to maintainability in Java can be seen in table \ref{table:main-overview-java}. We can see that the relations appear to be less strong by looking at the Pearson coefficients. Meanwhile the standard deviation is quite high in most characteristic, indicating a large difference between projects.
 
 \begin{table}[H]
 \centering
-\caption{Overview of maintainability characteristic results}
+\caption{Overview of maintainability characteristic results in Python}
 \label{table:main-overview}
 \begin{tabular}{lll}
                          & \textbf{Pearson Coefficient} & \textbf{Standard Deviation} \\
@@ -431,6 +433,20 @@ Table \ref{table:main-overview} contains the results for all tested characterist
 \textbf{Re-usability}    & 0.137                        & 0.525                       \\
 \textbf{Testability}     & 0.251                        & 0.365                       \\
 \textbf{Maintainability} & 0.521                        & 0.277                      
+\end{tabular}
+\end{table}
+
+\begin{table}[H]
+\centering
+\caption{Overview of maintainability characteristic results in Java}
+\label{table:main-overview-java}
+\begin{tabular}{lll}
+                         & \textbf{Pearson Coefficient} & \textbf{Standard Deviation} \\
+\textbf{Analysability}   & 0.222                        & 0.321                       \\
+\textbf{Changeability}   & 0.048                        & 0.708                       \\
+\textbf{Re-usability}    & -0.030                       & 0.589                       \\
+\textbf{Testability}     & -0.183                       & 0.740                       \\
+\textbf{Maintainability} & 0.163                        & 0.416                      
 \end{tabular}
 \end{table}
 
@@ -481,10 +497,19 @@ Table \ref{table:perf-overview} contains the results for all performance efficie
 \chapter{Discussion}
 We have measured two main characteristics and their sub-characteristics from the ISO/IEC 25010 standard: maintainability and performance efficiency. By plotting them against the modularity of the programs used we are able to find correlations between them.
 
-\myparagraph{Modularity vs. Maintainability}
+\section{Modularity vs. Maintainability}
+\myparagraph{Python}
 The results show that there is in fact a positive correlation between the modularity and maintainability of a program. Whilst not all sub-characteristics of maintainability show a positive correlation with modularity, the overall results show a Pearson coefficient of 0.537, indicating a strong correlation between the two. Thus, we can say that modularity has a positive effect on the maintainability of a program. The reason why the analysability of a program is negatively influenced by the modularity might be because a more modular program might contain more files, making it harder to analyze all functionality. Though this is just speculation.
 
-\myparagraph{Modularity vs. Performance Efficiency}
+\myparagraph{Java}
+When looking at the Java test results for all maintainability-related characteristics in table \ref{table:main-overview-java} we can see that the correlations appear to be quite weak. With a Pearson coefficient of just 0.163 there appears to be just a slight correlation between modularity and maintainability in Java programs. On the other hand, the large standard deviation in most characteristics involved might indicate that there is no overall relation which could be applied to Java programs.
+
+\myparagraph{The difference between Python and Java}
+As we can see, Python programs appear to have a positive correlation between modularity and maintainability. With a Pearson coefficient of 0.537 this correlation appears to be quite strong. On the other hand, our experiments have shown that there is just a slight positive correlation between the two characteristics when it comes to Java programs. Another observation is that Python programs appear to follow the pattern more closely. With only one standard deviation of above 0.500 it appears to be much more predictable than Java programs, which have three standard deviations above 0.500.\\
+
+The reason why Java programs show a different result might be because of the way the two programming languages are used. As we have seen previously, the official scale of a module is much larger in Java than in Python. This larger scale might indicate that it is more common to separate functionality among different files on a smaller scale in Java than in Python.
+
+\section{Modularity vs. Performance Efficiency}
 When looking at the effect of modularity on the resource utilization and time behavior of a program, we can see that in both cases there is a slight positive correlation between the two. However, the Pearson coefficient values of 0.287 and 0.169 respectively indicate that a more modular program is likely to use more memory than a less modular program, as well as take longer to execute. This might also be due to the fact that a single module (file) might contain more code, since all functionality is grouped together according to the definition of a module. This could also be a cause for the increase in execution time, since it will take longer to execute a bigger program. Overall we can say that modularity has a negative effect on the performance efficiency of a program since a positive correlation is present. 
 
 \chapter{Related Work}
