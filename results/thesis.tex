@@ -28,7 +28,6 @@
 
 
 \chapter{Introduction}
-\todo{Remove time references everywhere}
 Creating high quality software is often very difficult, and becomes even harder when the size increases. Over the years, many standards and guidelines have been developed to provide general definitions and rules for software. Examples of this are the Don't Repeat Yourself (DRY) concept, cyclomatic complexity metric and test coverage measurements. Even though there are in many cases clear quantitative guidelines for these values and concepts, they are hard to strictly follow in complex programs.\\
 
 If we look at a more general view of software, we get to the field of software design. Software design is the process by which an agent creates a specification of a software artifact, intended to accomplish goals, using a set of primitive components and subject to constraints. One of these design techniques is modular programming, which we will analyze in this thesis. Modular programming emphasizes separating the functionality of a program into independent, interchangeable modules, such that each contains everything necessary to execute only on aspect of the desired functionality. In this paper a method of measuring the degree of modularity of a program is developed, after which a set of programs is tested on different quality characteristics, including modularity.
@@ -306,7 +305,10 @@ After the validation, 41 Python projects are used to do experiments on the relat
 Measuring the differences in performance efficiency between multiple projects with a different modularity score requires a set of projects with the same functionality. Therefore the test suite will consist of 11 web crawlers written in Python.
 
 \section{Java experiments}
-\todo{Insert once Java test have been executed}
+By doing experiments on Java projects we are able to see whether our results from Python are also valid for Java (and could thus also be for other languages).
+
+\myparagraph{Modularity vs. Maintainability}
+Our Java test suite consists of 15 Java projects. Using these projects we will see if there are any similarities between the relation between modularity and maintainability in Java and Python. The test suite consists of projects related to IoT and web crawlers.
 
 \section{System specifications}
 Whilst static program analysis is generally not influenced by the operating system or processor, dynamic program analysis does get affected by the system specifications. All experiments have been executed on a laptop with the specifications seen in table \ref{table:specifications}.
@@ -343,7 +345,6 @@ As we can see in table \ref{table:validation}, our method produces the same resu
 Maintainability consists of five sub-characteristics, which were all calculated for each of the projects in our test set. For each of the sub-characteristics (excluding modularity) a scatter chart was created to visualize their relation to modularity and find a trend line supporting the results. The results for each sub-characteristic are discussed below.
 
 \subsection{Analysability}
-\myparagraph{Python}
 
 \begin{figure}[H]
     \caption{Modularity vs. Analysability results in Python}
@@ -352,13 +353,14 @@ Maintainability consists of five sub-characteristics, which were all calculated 
         \includegraphics[width=0.70\textwidth]{modularity-analysability}
 \end{figure}
 
+\myparagraph{Python}
 As we can see from figure \ref{figure:mod-analysis} there is almost no correlation between the modularity and analysability of a Python program. The results show us that most data-points follow the trend-line with no real outliers. Looking at the Pearson coefficient for this relation, we can see that the value of -0.163 indicates a slight negative correlation between the two characteristics.
 
 \myparagraph{Java}
+\todo[inline]{Add graph for Java from sheets}
 Unlike Python, modularity and analysability show a slight positive correlation in Java programs. With a Pearson of coefficient of 0.222 and some (small) outliers this relation isn't very strong, but is clearly visible.
 
 \subsection{Changeability}
-\myparagraph{Python}
 
 \begin{figure}[H]
     \caption{Modularity vs. Changeability results in Python}
@@ -367,13 +369,14 @@ Unlike Python, modularity and analysability show a slight positive correlation i
         \includegraphics[width=0.70\textwidth]{modularity-changeability}
 \end{figure}
 
+\myparagraph{Python}
 The results of this test, see in figure \ref{figure:mod-change}, show a clear positive correlation between modularity and changeability in Python programs. With a Pearson coefficient of 0.457 this correlation is quite substantial.
 
 \myparagraph{Java}
+\todo[inline]{Add graph for Java from sheets}
 With a standard deviation of 0.708 there are a lot of outliers in the relation between modularity and changeability of Java programs. It appears that there is no substantial relation between the two characteristic, the Pearson coefficient is just 0.048.
 
 \subsection{Re-usability}
-\myparagraph{Python}
 
 \begin{figure}[H]
     \caption{Modularity vs. Re-usability results in Python}
@@ -382,13 +385,14 @@ With a standard deviation of 0.708 there are a lot of outliers in the relation b
         \includegraphics[width=0.70\textwidth]{modularity-reusability}
 \end{figure}
 
+\myparagraph{Python}
 Figure \ref{figure:mod-reuse} shows us that there is quite a large standard deviation in the re-usability scores of our Python test suite. The standard deviation we found is 0.525, which is less compact than the standard deviations of for example the analysability (0.207) and changeability (0.325). We can see a slight positive correlation between the modularity and re-usability of a program, which is supported by a Pearson coefficient of 0.137.
 
 \myparagraph{Java}
+\todo[inline]{Add graph for Java from sheets}
 Just like the changeability, re-usability in Java projects has a large standard deviation (0.589), showing that there is a lot of difference between different programs. The Pearson coefficient shows a slight negative correlation between modularity and re-usability. With a value of -0.030 you could say there is no relation at all.
 
 \subsection{Testability}
-\myparagraph{Python}
 
 \begin{figure}[H]
     \caption{Modularity vs. Testability results in Python}
@@ -397,13 +401,14 @@ Just like the changeability, re-usability in Java projects has a large standard 
         \includegraphics[width=0.70\textwidth]{modularity-testability}
 \end{figure}
 
+\myparagraph{Python}
 The relation between modularity and testability in Python projects appears to be slightly positive. With a Pearson coefficient of 0.251 this correlation is stronger than that of re-usability, which also has a higher standard deviation. Figure \ref{figure:mod-test} shows the relation using our test suite.
 
 \myparagraph{Java}
+\todo[inline]{Add graph for Java from sheets}
 Just like changeability, testability in Java shows a large standard deviation of 0.740. As we can see in figure ... the scores are all very low, with many outliers far from the trend line. With a Pearson coefficient of -0.183 the relation between modularity and testability is quite negative.
 
 \subsection{Overall}
-\myparagraph{Python}
 
 \begin{figure}[H]
     \caption{Modularity vs. Maintainability results in Python}
@@ -412,10 +417,12 @@ Just like changeability, testability in Java shows a large standard deviation of
         \includegraphics[width=0.65\textwidth]{modularity-maintainability}
 \end{figure}
 
+\myparagraph{Python}
 If we combine these results using a weighted average we get the overall maintainability scores, see figure \ref{figure:mod-main}. As we can see, an increased degree of modularity causes the maintainability to also increase. Using these results we can say that modularity has a positive effect on the maintainability of a program. With a Pearson coefficient of 0.521 this correlation is really strong, without having many outliers.
 
 \myparagraph{Java}
-
+\todo[inline]{Add graph for Java from sheets}
+By combining the results for each sub-characteristic in Java we can get see the overall maintainability relation in [TODO: add figure]. These results show us that there is a slight positive correlation between modularity and maintainability in Java programs. With a Pearson coefficient of 0.163, and a standard deviation of 0.416, this relation is not very strong. The high standard deviation indicates a large difference between Java projects.
 
 \subsection{Overview}
 Table \ref{table:main-overview} contains the results for all tested characteristics involved with maintainability in Python. We can see that most relations show a positive Pearson coefficient, except for analysability. Since the standard deviation is quite low for most relations, the correlation results are quite strong and could be applied to a more broad sense.\\
@@ -451,7 +458,7 @@ All test results from characteristics related to maintainability in Java can be 
 \end{table}
 
 \section{Performance efficiency}
-The two sub-characteristics of performance efficiency we have tested are resource utilization and time behavior. For both characteristics we calculated the relation to modularity and plotted the results in a scatter plot. The results are discussed below.
+The two sub-characteristics of performance efficiency we have tested are resource utilization and time behavior. For both characteristics we calculated the relation to modularity for Python programs and plotted the results in a scatter plot. The results are discussed below.
 
 \myparagraph{Resource utilization}
 \begin{figure}[H]
@@ -510,7 +517,7 @@ As we can see, Python programs appear to have a positive correlation between mod
 The reason why Java programs show a different result might be because of the way the two programming languages are used. As we have seen previously, the official scale of a module is much larger in Java than in Python. This larger scale might indicate that it is more common to separate functionality among different files on a smaller scale in Java than in Python.
 
 \section{Modularity vs. Performance Efficiency}
-When looking at the effect of modularity on the resource utilization and time behavior of a program, we can see that in both cases there is a slight positive correlation between the two. However, the Pearson coefficient values of 0.287 and 0.169 respectively indicate that a more modular program is likely to use more memory than a less modular program, as well as take longer to execute. This might also be due to the fact that a single module (file) might contain more code, since all functionality is grouped together according to the definition of a module. This could also be a cause for the increase in execution time, since it will take longer to execute a bigger program. Overall we can say that modularity has a negative effect on the performance efficiency of a program since a positive correlation is present. 
+When looking at the effect of modularity on the resource utilization and time behavior of a program in Python, we can see that in both cases there is a slight positive correlation between the two. However, the Pearson coefficient values of 0.287 and 0.169 respectively indicate that a more modular program is likely to use more memory than a less modular program, as well as take longer to execute. This might also be due to the fact that a single module might contain more code, since all functionality is grouped together according to the definition of a module. The same could be a cause for the increase in execution time, since it will take longer to execute and load a bigger program. Overall we can say that modularity has a slight negative effect on the performance efficiency of a program since a positive correlation is present. 
 
 \chapter{Related Work}
 As we can conclude from other researches\cite{LinuxKernel,lee2000linux},modularity allows for more collaborative software development, and makes it easier to find and resolve bugs. However, we are curious whether modularity has any effect on the quality of software, something which cannot be determined from the above. Research has been done on this matter already\cite{stamelos2002code}. In this research, 100 open source C applications were investigated on different quality metrics. As a result, a clear relationship between high modularity and software quality was found. Whilst this follows our hypothesis, there are a few flaws to this research from our point of view. The main flaw is that the metrics used to define the quality of a program only covers a portion of all characteristics that are present in the ISO/IEC 25010 standard on software quality\cite{ISO25010}. Besides this, the research was focused on open source C applications, while our research focuses on (open source) Python applications.
