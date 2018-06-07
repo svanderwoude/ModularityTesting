@@ -57,7 +57,7 @@ In 2011, the International Organization for Standardization released the ISO/IEC
 The ISO/IEC 25010 standard defines eight characteristics that can be evaluated when looking at the quality of a piece of software. Some of these relate to the outcome of interaction when a product is used in a particular context, others relate to the static properties of software and dynamic properties of the computer system it is used in. We proceed to analyze the full list of characteristics in alphabetical order from the perspective of our research. Besides providing the description defined by ISO we will analyze the importance for this research.
 
 \subsection{Compatibility}
-The first quality characteristic is compatibility. Compatibility is referred to as the degree to which a product, system or component can exchange information with other products, systems or components, and/or perform its required functions, while sharing the same hardware or software environment. ISO divides this into two sub-characteristics: co-existence and interoperability. In our research we will not look at this characteristic since modularity is likely to have no effect on the way a program could communicate or operate with other systems.
+The first quality characteristic is compatibility. Compatibility is referred to as the degree to which a product, system or component can exchange information with other products, systems or components, and/or perform its required functions, while sharing the same hardware or software environment. ISO divides this into two sub-characteristics: co-existence and interoperability.
 
 \myparagraph{Co-existence}
 The first sub-characteristic is co-existence. Co-existence is the degree to which a product can perform its required functions efficiently while sharing a common environment and resources with other products without detrimental impact on any other product.
@@ -66,7 +66,7 @@ The first sub-characteristic is co-existence. Co-existence is the degree to whic
 The interoperability of two or more systems, products or component defines the degree to which they can exchange information and use the information that can be exchanged.
 
 \subsection{Functional suitability}
-The second quality characteristic is functional suitability, this characteristic defines the degree to which a product or system provides functions that meet stated and implied needs when used under specified conditions. This characteristic consists of three sub-characteristics: functional appropriateness, functional completeness and functional correctness. We will not look at the functional suitability of our test programs since the functionality does not rely on the modularity of a program.
+The second quality characteristic is functional suitability, this characteristic defines the degree to which a product or system provides functions that meet stated and implied needs when used under specified conditions. This characteristic consists of three sub-characteristics: functional appropriateness, functional completeness and functional correctness.
 
 \myparagraph{Functional appropriateness}
 The functional appropriateness of a system defines the degree to which the set of functions facilitate the accomplishment of specified tasks and objectives.
@@ -78,7 +78,7 @@ The second sub-characteristic defines the degree to which the set of functions i
 The functional completeness of a product or system defines the degree to which it provides the correct results with the needed degree of precision.
 
 \subsection{Maintainability}
-The next characteristic, after functional suitability, is maintainability. Whilst maintainability could be evaluated differently per person, there are some aspects of a program that can be measured to determine the maintainability of a program. In this case we refer to maintainability as the degree of effectiveness and efficiency with which a product or system can be modified to improve it, correct it, or adapt to changes in environment, and in requirements. This characteristic consists of four aspects. We will look at the relation between modularity and maintainability since the software design method of a system can have effect on the maintainability of the system.
+The next characteristic, after functional suitability, is maintainability. Whilst maintainability could be evaluated differently per person, there are some aspects of a program that can be measured to determine the maintainability of a program. In this case we refer to maintainability as the degree of effectiveness and efficiency with which a product or system can be modified to improve it, correct it, or adapt to changes in environment, and in requirements. This characteristic consists of four aspects.
 
 \myparagraph{Analysability}
 Analysability is the degree of effectiveness and efficiency with which it is possible to assess the impact on a product or system of an intended change to one or more of its parts, or to diagnose a product for deficiencies or causes of failures, or to identify parts to be modified.
@@ -96,7 +96,7 @@ With re-usability, we refer to the degree to which an asset can be used in more 
 The final sub-characteristic of maintainability is testability. Testability defines the degree of effectiveness and efficiency with which test criteria can be established for a system, product or component and tests can be performed to determine whether those criteria have been met.
 
 \subsection{Performance efficiency}
-The fourth characteristic, performance efficiency, presents the performance relative to the amount of resources used under stated conditions. This means that three components of performance and resources have to be tested. Performance efficiency is likely to be affected by the modularity of a program since the execution flow might be different. We will look at the relation between modularity and performance efficiency to support this.
+The fourth characteristic, performance efficiency, presents the performance relative to the amount of resources used under stated conditions. This means that three components of performance and resources have to be tested.
 
 \myparagraph{Capacity}
 The first component is capacity, capacity is defined as the degree to which the maximum limits of a product or system parameter meets the requirements. We will ignore this sub-characteristic since the capacity of a program is arbitrary.
@@ -108,7 +108,7 @@ Next, performance efficiency contains the sub-characteristic resource utilizatio
 The final component to look at is the degree to which the response and processing times and throughput rates of a product or system, when performing its functions, meet the requirements. We refer to this as the time behavior of a product or system.
 
 \subsection{Portability}
-The next characteristic defines the degree of effectiveness and efficiency with which a system, product or component can be transferred from one hardware, software or other operational or usage environment to another. We call this characteristic the portability of a system, product or component. When defining the portability, we can look at three different sub-characteristics: adaptability, installability and replaceability. Even though portability might be influenced by the modularity of a system, we will not look at this characteristic in this research due to the importance of others.
+The next characteristic defines the degree of effectiveness and efficiency with which a system, product or component can be transferred from one hardware, software or other operational or usage environment to another. We call this characteristic the portability of a system, product or component. When defining the portability, we can look at three different sub-characteristics: adaptability, installability and replaceability.
 
 \myparagraph{Adaptability}
 With adaptability, we refer to the degree to which a product or system can effectively and efficiently be adapted for different or evolving hardware, software or other operation or usage environments.
@@ -120,7 +120,7 @@ The second sub-characteristic defines the degree of effectiveness and efficiency
 The final sub-characteristic, replaceability, defines the degree to which a product can replace another specified product for the same purpose in the same environment.
 
 \subsection{Reliability}
-The next quality characteristic is reliability. With reliability we refer to the degree to which a system, product or component performs specified functions under specified conditions for a specified period of time. We can split this into four smaller characteristics. The reliability of a system does not depend on the software design used, thus we shall not look at the relation between the modularity and reliability of a program.
+The next quality characteristic is reliability. With reliability we refer to the degree to which a system, product or component performs specified functions under specified conditions for a specified period of time. We can split this into four smaller characteristics.
 
 \myparagraph{Availability}
 With availability we refer to the degree to which a system, product or component is operational and accessible when required for use.
@@ -135,7 +135,7 @@ The next sub-characteristic is maturity. Maturity is defined as the degree to wh
 The final sub-characteristic, recoverability, defines the degree to which, in event of an interruption or failure, a product or system can recover the data directly affected and re-establish the desired state of the system.
 
 \subsection{Security}
-The seventh quality characteristic defines the degree to which a product or system protects information and data so that persons or other products or systems have the degree of data access appropriate to their types and levels of authorization. We call this characteristic security. This can in turn be divided into five sub-characteristics such as confidentiality and integrity. Modularity does not have an effect on the security measures implemented in a piece of software, therefore we will ignore this characteristic in this research.
+The seventh quality characteristic defines the degree to which a product or system protects information and data so that persons or other products or systems have the degree of data access appropriate to their types and levels of authorization. We call this characteristic security. This can in turn be divided into five sub-characteristics such as confidentiality and integrity.
 
 \myparagraph{Accountability}
 The first sub-characteristic is accountability. Accountability shows the degree to which the actions of an entity can be traced uniquely to the entity.
@@ -153,7 +153,7 @@ The degree to which a system, product or component prevents unauthorized access 
 The final sub-characteristic is non-repudiation. This characteristic defines the degree to which actions or events can be proven to have taken place, so that events or actions cannot be repudiated later.
 
 \subsection{Usability}
-The final characteristic in the ISO 25010 standard is usability. Usability defines the degree to which a product or system can be used by specified users to achieve specified goals with effectiveness, efficiency and satisfaction in a specified context of use. We can split this into the six sub-characteristics defined below. This characteristic mainly depends on the User Experience of a program, since we will not cover this topic we will not look if there is a relation between modularity and User Experience.
+The final characteristic in the ISO 25010 standard is usability. Usability defines the degree to which a product or system can be used by specified users to achieve specified goals with effectiveness, efficiency and satisfaction in a specified context of use. We can split this into the six sub-characteristics defined below.
 
 \myparagraph{Accessibility}
 The first sub-characteristic is accessibility. With accessibility we define the degree to which a product or system can be used by people with the widest range of characteristics and capabilities to achieve a specified goal in a specified context of use.
@@ -172,27 +172,6 @@ The next sub-characteristic defines the degree to which a system protects users 
 
 \myparagraph{User interface aesthetics}
 Finally, the sub-characteristic user interface aesthetics defines the degree to which a user interface enables pleasing and satisfying interaction for the user.
-
-\subsection{Overview}
-As mentioned, not all (sub-) characteristics of the ISO 25010 will be measured in this research. The most important characteristics for us are maintainability and performance efficiency, whilst the others are either less important or not suitable for this research. See table \ref{table:overview} for an overview of all characteristics.
-
-\begin{table}[H]
-\centering
-\caption{ISO 25010 characteristics overview}
-\label{table:overview}
-\begin{tabular}{ll}
-\multicolumn{1}{l|}{\textbf{Characteristic}} & \textbf{Measured in research} \\ \hline
-\multicolumn{1}{l|}{Compatibility}           & No                            \\
-\multicolumn{1}{l|}{Functional suitability}  & No                            \\
-\multicolumn{1}{l|}{Maintainability}         & Yes                           \\
-\multicolumn{1}{l|}{Performance efficiency*} & Yes                           \\
-\multicolumn{1}{l|}{Portability}             & No                            \\
-\multicolumn{1}{l|}{Reliability}             & No                            \\
-\multicolumn{1}{l|}{Security}                & No                            \\
-\multicolumn{1}{l|}{Usability}               & No                            \\
-*Except for capacity                         &                              
-\end{tabular}
-\end{table}
 
 \section{Software design}
 As mentioned above, achieving high quality software could be done using code conventions. An example of an architectural code convention is the use of a software design pattern. These patterns, or techniques, describe the design of the design: how will the program be structured? Edsger W. Dijkstra referred to this layering of semantic levels as the "radical novelty" of computer programming\cite{dijkstra1988}. As we have seen, these code conventions, such as using a software design pattern, improve the readability (or analysability) of a program. In turn, increasing the analysability of a program increases the maintainability of the program, according to modern standards\cite{ISO9126,ISO25010}. In this thesis we focus on the Modular Programming design technique.
@@ -215,9 +194,55 @@ Since a module is a self-contained piece of software, it is important that it ha
 Since a module is a piece of software that (ideally) can function without any external requirements, a module is easy to re-use. Using this property, we could state that a single function could also be considered a module, providing it does not require any external dependencies. However, just like the scale of a module used in Java\cite{javamodules}, we will not consider this to be a module in this work. We define a module as being a single file with code, just like the official definition used by Python\cite{pythonmodules}.
 
 \chapter{Research}
-Since the main goal of this research is to find differences between modular and non-modular programs, it is important that we are able to define whether a program is modular or not. Thus, one of the main problems to tackle is the categorization of programs by measuring their modularity.\\
+Since the main goal of this research is to find differences between modular and non-modular programs, it is important that we are able to define whether a program is modular or not. Thus, one of the main problems to tackle is the categorization of programs by measuring their modularity. After calculating the modularity of each program, we will perform tests on quality characteristics from the ISO/IEC 25010 standard\cite{ISO25010}.\\
 
-After the programs have been categorized, they have to be measured on the different characteristics defined in the ISO/IEC 25010 standard. In this research we will focus on maintainability and performance efficiency measurements, as seen in table \ref{table:overview}.
+\section{Quality characteristics}
+Even though the ISO/IEC 25010 standard consists of eight characteristics, not all of them are used in this work. Below we will analyze the importance of each of the characteristics.
+
+\myparagraph{Compatibility}
+We do not consider this to be a relevant characteristic for our research since modularity is not likely to have an effect on the way a program could communicate or operate with other systems.
+
+\myparagraph{Functional suitability}
+Functional suitability does not rely on the modularity of a program, therefore we will not analyze the effect of modularity on the functional suitability of a program.
+
+\myparagraph{Maintainability}
+Since maintainability is an important aspect of software quality, and is (in)directly affected by many properties of the software, we will look at the relation between modularity and maintainability.
+
+\myparagraph{Performance efficiency}
+Performance efficiency is likely to be affected by the modularity of a program since the execution flow might be different depending on the level of modularity. Since the number of files to load during execution could change depending on the modularity, it is likely that the memory usage, and thus execution speed, will be affected by the modularity of a program. We will analyze whether this is true or not.
+
+\myparagraph{Portability}
+Even though portability might be influenced by the modularity of a system, we will not look at this characteristic in this research due to the importance of others.
+
+\myparagraph{Reliability}
+The reliability of a system does not depend on the software design used, thus we shall not look at the relation between modularity and the reliability of a program.
+
+\myparagraph{Security}
+Modularity does not have an effect on the security measures implemented in a piece of software, therefore we will not analyze this characteristic in this research.
+
+\myparagraph{Usability}
+This characteristic mainly depends on the user experience of a program, since we will not cover this topic we will not analyze if there is a relation between modularity and usability.
+
+\subsection{Overview}
+As mentioned, not all (sub-)characteristics of the ISO/IEC 25010 standard will be analyzed in this research. The most important characteristics for us are maintainability and performance efficiency, whilst the others are either less important or not suitable for this research. See table \ref{table:overview} for an overview of all characteristics.
+
+\begin{table}[H]
+\centering
+\caption{ISO 25010 characteristics overview}
+\label{table:overview}
+\begin{tabular}{ll}
+\multicolumn{1}{l|}{\textbf{Characteristic}} & \textbf{Measured in research} \\ \hline
+\multicolumn{1}{l|}{Compatibility}           & No                            \\
+\multicolumn{1}{l|}{Functional suitability}  & No                            \\
+\multicolumn{1}{l|}{Maintainability}         & Yes                           \\
+\multicolumn{1}{l|}{Performance efficiency*} & Yes                           \\
+\multicolumn{1}{l|}{Portability}             & No                            \\
+\multicolumn{1}{l|}{Reliability}             & No                            \\
+\multicolumn{1}{l|}{Security}                & No                            \\
+\multicolumn{1}{l|}{Usability}               & No                            \\
+*Except for capacity                         &                              
+\end{tabular}
+\end{table}
 
 \section{Methodology}
 \subsection{Criteria}
