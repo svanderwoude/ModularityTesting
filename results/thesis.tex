@@ -8,6 +8,8 @@
 \usepackage{amsmath}
 \usepackage{float}
 \usepackage[toc,page]{appendix}
+\usepackage{ulem}
+\usepackage{hyperref}
 
 \newcommand{\myparagraph}[1]{\paragraph{#1}\mbox{}\\}
 
@@ -15,13 +17,13 @@
 \title{The effect of modularity on software quality}
 \author{Stefan van der Woude}
 \supervisors{dr. A.M. Oprescu}
-\signedby{Signees}
+\signedby{}
 
 \begin{document}
 \maketitle
 
 \begin{abstract}
-Modular programming is a highly used software design pattern in both private and open source software projects. Despite previous research on the effect of modularity on the development cycle, there is no sufficient research on the effect of modularity on the quality of software. In this work, a method is presented to detect the level of modularity for any software project. By using this method, the modularity of a program can be compared to different quality characteristics. Using the results from these experiments, an analysis was done on the effect of modularity on the quality of software, by using the definitions of modularity and performance efficiency from the ISO/IEC 25010 standard. The analysis has shown that there is in fact a positive correlation between the modularity and quality of Python programs.
+Modular programming is a highly used software design pattern in both private and open source software projects. Despite previous research on the effect of modularity on the development cycle, there is no sufficient research \todo{in what sense sufficient? what do we not know yet?} on the effect of modularity on the quality of software. In this work, a method \todo{why do we need a new method?} is presented to detect the level of modularity for any software project. By using this method, the modularity of a program can be compared to different \todo{do you mean other or various?} quality characteristics. We performed several sets of experiments to analyze the effect of modularity on the quality of software, as defined in the ISO/IEC 25010 standard. Our analysis shows that there is in fact a positive correlation between the modularity and the quality of Python programs. We also find a weaker correlation between modularity and quality of Java programs.
 \end{abstract}
 
 \tableofcontents
@@ -48,6 +50,7 @@ This work will expand on existing research on software measurements regarding mo
 \todo[inline]{Do this once all other content is done to prevent incorrect information}
 
 \chapter{Background}
+\label{chapter:background}
 Writing good code is something you strive for from the day you start learning programming. One aspect of high quality software is maintainability\cite{ISO9126,ISO25010}. In turn, code quality improves the maintainability of a program, for example by lowering the complexity of the program\cite{banker1993software}. Besides a low complexity, one could think that the lack of bad practices in your code base could also be an indication of maintainable software. However, research has shown that these code smells do not necessarily have a direct negative (nor a positive) effect on maintainability\cite{sjoberg2013quantifying}. It is shown that code conventions, sets of guidelines for programming languages that recommend programming style, improve the readability of the software by applying some level of consistency which can be analyzed faster\cite{javaconventions}. These conventions range from naming conventions to architectural best practices.
 
 \section{Software quality}
@@ -174,7 +177,7 @@ The next sub-characteristic defines the degree to which a system protects users 
 Finally, the sub-characteristic user interface aesthetics defines the degree to which a user interface enables pleasing and satisfying interaction for the user.
 
 \section{Software design}
-As mentioned above, achieving high quality software could be done using code conventions. An example of an architectural code convention is the use of a software design pattern. These patterns, or techniques, describe the design of the design: how will the program be structured? Edsger W. Dijkstra referred to this layering of semantic levels as the "radical novelty" of computer programming\cite{dijkstra1988}. As we have seen, these code conventions, such as using a software design pattern, improve the readability (or analysability) of a program. In turn, increasing the analysability of a program increases the maintainability of the program, according to modern standards\cite{ISO9126,ISO25010}. In this thesis we focus on the Modular Programming design technique.
+As discussed in \autoref{chapter:background}, achieving high quality software could be done using code conventions. An example of an architectural code convention is the use of a software design pattern. These patterns, or techniques, describe the design of the design: how will the program be structured? Edsger W. Dijkstra referred to this layering of semantic levels as the "radical novelty" of computer programming\cite{dijkstra1988}. As we have seen, these code conventions, such as using a software design pattern, improve the readability (or analysability) of a program. In turn, increasing the analysability of a program increases the maintainability of the program, according to modern standards\cite{ISO9126,ISO25010}. In this thesis we focus on the Modular Programming design technique.
 
 \subsection{Modular programming}
 Modular programming is a software design technique that emphasizes separating the functionality of a program into independent, interchangeable modules, such that each contains everything necessary to execute only one aspect of a desired functionality. Although not all programming languages formally support the concept of modules, languages like C\#\cite{csharpmodules}, Java\cite{javamodules} and Python\cite{pythonmodules} do.\\
@@ -194,16 +197,16 @@ Since a module is a self-contained piece of software, it is important that it ha
 Since a module is a piece of software that (ideally) can function without any external requirements, a module is easy to re-use. Using this property, we could state that a single function could also be considered a module, providing it does not require any external dependencies. However, just like the scale of a module used in Java\cite{javamodules}, we will not consider this to be a module in this work. We define a module as being a single file with code, just like the official definition used by Python\cite{pythonmodules}.
 
 \chapter{Research}
-Since the main goal of this research is to find differences between modular and non-modular programs, it is important that we are able to define whether a program is modular or not. Thus, one of the main problems to tackle is the categorization of programs by measuring their modularity. After calculating the modularity of each program, we will perform tests on quality characteristics from the ISO/IEC 25010 standard\cite{ISO25010}.\\
+Since the main goal of this research is to find differences between modular and non-modular programs, it is important that we are able to define whether a program is modular or not. Thus, one of the main problems to tackle is defining what is considered modularity. After defining modularity, we have to find a way to measure the modularity of programs. And finally, after calculating the modularity of each program, we will perform tests on quality characteristics from the ISO/IEC 25010 standard\cite{ISO25010}. After we have calculated both the modularity and quality scores we can plot the results in a graph, using modularity and one of the quality characteristics as the axes. Using the resulting graphs we can analyze the relation between the two characteristics.\\
 
 \section{Quality characteristics}
-Even though the ISO/IEC 25010 standard consists of eight characteristics, not all of them are used in this work. Below we will analyze the importance of each of the characteristics.
+Even though the ISO/IEC 25010 standard consists of eight characteristics, not all of them are used in this work. We proceed by explaining the rationale for the inclusion/exclusion of these characteristics.
 
 \myparagraph{Compatibility}
-We do not consider this to be a relevant characteristic for our research since modularity is not likely to have an effect on the way a program could communicate or operate with other systems.
+We do not consider this to be a relevant characteristic for our research since modularity is not likely to have an effect on the way a program could communicate or operate with other systems. Even though it might be easier to add communicative functionality to a modular program, it is not necessarily the case that any API / communicative functionality is available.
 
 \myparagraph{Functional suitability}
-Functional suitability does not rely on the modularity of a program, therefore we will not analyze the effect of modularity on the functional suitability of a program.
+Functional suitability does not rely on the modularity of a program since the design of the software architecture does not create any functionality that should be available. Therefore we will not analyze the effect of modularity on the functional suitability of a program.
 
 \myparagraph{Maintainability}
 Since maintainability is an important aspect of software quality, and is (in)directly affected by many properties of the software, we will look at the relation between modularity and maintainability.
@@ -212,19 +215,19 @@ Since maintainability is an important aspect of software quality, and is (in)dir
 Performance efficiency is likely to be affected by the modularity of a program since the execution flow might be different depending on the level of modularity. Since the number of files to load during execution could change depending on the modularity, it is likely that the memory usage, and thus execution speed, will be affected by the modularity of a program. We will analyze whether this is true or not.
 
 \myparagraph{Portability}
-Even though portability might be influenced by the modularity of a system, we will not look at this characteristic in this research due to the importance of others.
+Even though portability might be influenced by the modularity of a system. Since the portability of a system is not affected by the software design pattern used, we will not analyze this characteristic. It is, however, the case that a single module within a modular system is easier to migrate to another system since there are (should be) no external dependencies hindering the migration.
 
 \myparagraph{Reliability}
-The reliability of a system does not depend on the software design used, thus we shall not look at the relation between modularity and the reliability of a program.
+Just like with portability, the software design pattern used does not affect the reliability of a system, since it depends on the code itself, not the design. Thus, we shall not look at the relation between modularity and the reliability of a program.
 
 \myparagraph{Security}
-Modularity does not have an effect on the security measures implemented in a piece of software, therefore we will not analyze this characteristic in this research.
+The security of a program is defined by the security measures implemented in the code. Since we are looking at a design pattern rather than code, the relation between modularity and security will not be analyzed in this research.
 
 \myparagraph{Usability}
-This characteristic mainly depends on the user experience of a program, since we will not cover this topic we will not analyze if there is a relation between modularity and usability.
+This characteristic mainly depends on the user experience of a program. As this topic is not part of our research goal, we will not analyze if there is a relation between modularity and usability.
 
 \subsection{Overview}
-As mentioned, not all (sub-)characteristics of the ISO/IEC 25010 standard will be analyzed in this research. The most important characteristics for us are maintainability and performance efficiency, whilst the others are either less important or not suitable for this research. See table \ref{table:overview} for an overview of all characteristics.
+Not all (sub-)characteristics of the ISO/IEC 25010 standard will be analyzed in this research. The most important characteristics for us are maintainability and performance efficiency, whilst the others are either less important or not suitable for this research. Table \ref{table:overview} gives an overview of all characteristics.
 
 \begin{table}[H]
 \centering
@@ -245,38 +248,38 @@ As mentioned, not all (sub-)characteristics of the ISO/IEC 25010 standard will b
 \end{table}
 
 \section{Methodology}
-\subsection{Criteria}
-In this research we limit ourselves to some degree. First of all, we will only use projects with less than 100k lines. Secondly, we will not use any files that are empty, nor will we use any test files or files place inside test directories. For this exclusion, we assume that test files will either have 'test' in their name, or are situated in a place where a parent folder contains the word 'test' in its name. Besides this we will also ignore files that produce an error while being evaluated. If a big part of all files within a project produce errors, and are thus discarded, we will discard the entire project since we would not be able to give an accurate result for the entire program.
+After defining which quality characteristics will be analyzed, we can look at how we will perform the experiments. We will have to find a set of projects to be tested. For each of these projects we will have to calculate the modularity and the two quality characteristics scores: maintainability and performance efficiency. Using these scores we can perform our analysis on the effect of modularity on the quality of software.
 
 \subsection{Program analysis}
-In order to analyze each project, we will have to make use of different analyzing methods. Some aspects, such as performance, require a program to be executed. Other characteristics of a program, for example code volume or complexity, do not require execution.
+In order to analyze each program, we will have to make use of different analyzing methods. Some aspects, such as performance, require a program to be executed. Other characteristics of a program, for example code volume or complexity, do not require execution.\\
 
-\myparagraph{Dynamic program analysis}
-Dynamic program analysis is the analysis of software performed by executing the program on a real or virtual processor. In order to get accurate and effective results, dynamic program analysis should be performed multiple times.
+In the first case, we employ dynamic program analysis\cite{nielson2015principles}.
+Dynamic program analysis is the analysis of software performed by executing the program on a real or virtual processor. In order to get accurate and effective results, dynamic program analysis should be performed multiple times.\\
 
-\myparagraph{Static program analysis}
+In the second case, we employ static program analysis\cite{nielson2015principles}.
 Static program analysis is the analysis of software performed without executing the program. This form of program analysis is performed on the source code of a program and can give insight in aspects like volume, complexity and modularity (which we will cover below).
 
 \subsection{Modularity}
-In order to measure the modularity of a program correctly, we will have to measure different aspects of a program. We can use the two main characteristics of a module, low couping and high cohesion, to do so. Since these characteristics tell us something about the dependencies within a program, measuring the dependencies between modules would be an accurate representation of the modularity.
+In order to measure the modularity of a program correctly, we \sout{will} have to measure different aspects of a program. We achieve this by using the two main characteristics of a module, low coupling and high cohesion. Since these characteristics tell us something about the dependencies within a program, measuring the dependencies between modules would be an accurate representation of the modularity.  
 
 \myparagraph{Measuring dependencies of a module}
-Dependencies exist in many forms, such as (imported) variables and constants, but mainly function calls and class definitions. Even though variables or constants used from other modules are also dependencies, we do not consider these relevant in this research. In order to measure the modularity of a module, we will look at the function calls that exist within the module. We categorize these function calls into internal and external function calls. The first being function calls made to functions within the module itself, while the latter are calls to functions outside of the current module. Once we have gathered all function calls, and categorized them into their respective groups, we can calculate the modularity. We calculate the modularity of a module with the following formula:
+Dependencies exist in many forms, such as (imported) variables and constants, but mainly function calls and class definitions. Even though variables or constants used from other modules are also dependencies, we do not consider these relevant in this research. We do not consider them relevant since they do not have a direct impact on the functionality of the program, they mainly provide configuration. In order to measure the modularity of a module, we \sout{will} look at the function calls that exist within the module. We categorize these function calls into internal and external function calls. The former are function calls made to functions within the module itself, while the latter are calls to functions outside of the current module. Once we have gathered all function calls, and categorized them into their respective groups, we can calculate the modularity. We calculate the modularity of a module with the following formula:
 
 \[ modularity = \dfrac{internal\ calls}{all\ calls} \]
 
-This will give us a percentage that represents the modularity of the tested module. After doing this for all modules within a program, which in Python would be every single file, we can calculate the modularity for the entire program by taking the average of all separate modules.
+This will give us a percentage that represents the modularity of the tested module. After doing this for all modules within a program, we can calculate the modularity for the entire program by taking the average of all separate modules. \todo{ref to where you introduce the definiton of module}
 
 \myparagraph{Validating the categorization}
-It is important that the categorization of programs is correct, since any mistake could have a substantial impact on the outcome of the research. In order to validate the categorization mentioned above, we will compare the outcomes of the categorizations to that of Better Code Hub\cite{BetterCodeHub} and the method using the Modularity Index\cite{emanuel2013modularity}.
+It is important that the categorization of programs is correct, since any mistake could have a substantial impact on the outcome of the research. In order to validate the categorization mentioned above, we compare the outcomes of the categorizations to that of Better Code Hub\cite{BetterCodeHub} and the method using the Modularity Index\cite{emanuel2013modularity} \todo{here you should only mention that you compare against state-of-the-art established methods}.
 
-Better Code Hub is a tool developed by the Software Improvement Group\cite{SIG} which benchmarks a piece of software on their ten guidelines for maintainable software. One of these guidelines is 'Separate concerns in modules', which defines the modularity of a program. In order to measure this, Better Code Hub looks at the number of incoming calls to a module, which is then compared to the guideline values.
+\todo{this part belongs to related work, since you give a different definition and use a different way to compute it} Better Code Hub is a tool developed by the Software Improvement Group\cite{SIG} which benchmarks a piece of software on their ten guidelines for maintainable software. One of these guidelines is 'Separate concerns in modules', which defines the modularity of a program. In order to measure this, Better Code Hub looks at the number of incoming calls to a module, which is then compared to the guideline values.
 \todo[inline]{Remove this because it is also explained in the related work section??? If not: add explanation of Modularity Index}
+\todo{Ana says: indeed, remove from here! the explanation of M.I. should be in background}
 
-We will validate our method of classifying programs using a number of Python repositories. By using repositories that are somewhat the same in functionality we try to make the validation more accurate and more representative. During these tests we categorized a program as being modular when the modularity score exceeded the used threshold of 0.575 (or 57.5\%), which was deemed to be the optimal threshold.
+\todo[inline]{these are details that should go in the evaluation setup; also, you no longer only use Python repos. Also, you already mentioned that you will be using various projects} We validate our method of classifying programs using a number of Python repositories. By using repositories that are somewhat the same in functionality we try to make the validation more accurate and more representative. During these tests we categorized a program as being modular when the modularity score exceeded the used threshold of 0.575 (or 57.5\%), which was deemed to be the optimal threshold.
 
 \subsection{Maintainability}
-One of the main code quality characteristics is maintainability. As we have seen, maintainability can be split into the sub-characteristics analysability, modifiability, modularity, re-usability and testability. In order to compute the maintainability score for a program, we will have to first calculate all sub-characteristic scores. In order to calculate these, we will use an updated version of metrics proposed by the Software Improvement Group\cite{heitlager2016practical}. The weighted average of scores from other, even more defined, sub-characteristics, will be used to calculate the main characteristic scores. See table \ref{table:maintainability-weights} for the complete metric.
+One of the main code quality characteristics is maintainability. As we have seen, maintainability can be split into the sub-characteristics analysability, modifiability, modularity, re-usability and testability. In order to compute the maintainability score for a program, we first calculate all sub-characteristic scores. In order to calculate these, we  use an updated version of metrics~\cite{heitlager2016practical}. The weighted average of scores from other, \todo{what do you mean by even more defined?} even more defined, sub-characteristics, are used to calculate the main characteristic scores. Table~\ref{table:maintainability-weights} shows the complete metric matrix.
 
 \begin{table}[H]
 \centering
@@ -295,9 +298,9 @@ One of the main code quality characteristics is maintainability. As we have seen
 \end{tabular}
 \end{table}
 
-As mentioned, in order to measure each sub-characteristic defined above, we will use the model provided by the Software Improvement Group\cite{heitlager2016practical} as a guideline. However, we have adapted this slightly to fit our needs the best. The metrics that we will use for each sub-characteristic can be found in appendix \ref{appendix:maintainability_metrics}. After calculating the scores for each sub-characteristic with these metrics, we can calculate the score for each maintainability characteristic using the weighted average of a set of sub-characteristics, as defined above.\\
+In order to measure each sub-characteristic defined above, we use an existing model~\cite{heitlager2016practical} as a guideline. However, we have adapted this slightly to better fit our case \todo{in }. The metrics that we use for each sub-characteristic can be found in Appendix~\ref{appendix:maintainability_metrics}. Based \todo{this sentence seems superfluous; what is its point?} on the scores for each sub-characteristic we can calculate the score for each maintainability characteristic using the weighted average of a set of sub-characteristics, as defined above.\\
 
-Once we have computed the scores for each of the maintainability characteristics, we can use these to find the maintainability score for a program using the formula defined below.
+Once we computed the scores for each maintainability characteristic, we can use these to find the maintainability score for a program using the following formula:
 
 \[ Maintainability\ Score = \dfrac{3 * AS + 2 * CS + MS + 2 * RS + 2 * TC}{10} \]
 
@@ -308,36 +311,39 @@ $MS$ = Modularity Score\\
 $RS$ = Re-usability Score\\
 $TS$ = Testability Score\\
 \\
-This formula is based off of the metric defined by the Software Improvement Group, as seen in figure \ref{figure:maintainability_weights}. Since that model uses the ISO/IEC 9126 definition of maintainability, it is slightly adapted and extended. The metric we use uses the weight ratios for analysability and testability as defined in their work. We extended this by also applying the weight of testability to the changeability and re-usability scores, since they are of the same importance in maintainability. Finally, since modularity is part of maintainability in the ISO/IEC 25010 standard, we added this to the formula. Since we are looking at the relation between modularity and maintainability, the weight of modularity in this formula is kept low since it would show a positive correlation between the two if we did not.
+This formula is based on the metric defined by the Software Improvement Group, as seen in Figure~\ref{figure:maintainability_weights}. Since that model uses the ISO/IEC 9126 definition of maintainability, it is slightly adapted and extended. Our metric uses the weight ratios for analysability and testability as defined in their work \todo{whose work?}. We extended this by also applying the weight of testability to the changeability and re-usability scores, since they are of the same importance to maintainability. Finally, since modularity is part of maintainability in the ISO/IEC 25010 standard, we included it in the formula. Since we are looking at the relation between modularity and maintainability, the weight of modularity in this formula is kept low since it would show a positive correlation between the two if we did not.
 
 \subsection{Performance efficiency}
-Performance efficiency consists of three sub-characteristics: capacity, resource utilization and time behavior. For our research we will discard capacity and only focus on resource utilization and time behavior during normal execution. In order to measure these performance characteristics we will make use of dynamic program analysis. We will make eight Python web crawlers perform the same action on a web page for 100 iterations. After these iterations we are able to take the average time taken for each tool and compare that to the modularity score of each program. We will make all crawlers extract the first input element, or somethings similar, from the Google homepage (https://google.com) in each iteration.\\
-
+Performance efficiency consists of three sub-characteristics: capacity, resource utilization and time behavior. For our research we will discard capacity todo{why is it discarded?} and only focus on resource utilization and time behavior during normal execution. In order to measure these performance characteristics we make use of dynamic program analysis. We \todo{what is the point of this web crawling activity and why should it be described in here and not in the evaluation setup?}  make eight Python web crawlers perform the same action on a web page for 100 iterations. After these iterations we are able to take the average time taken for each tool and compare that to the modularity score of each program. We make all crawlers extract the first input element, or somethings similar, from the Google homepage (https://google.com) in each iteration.
 In order to measure the resource utilization we will run each program with the built-in time module of Ubuntu. This will give us some statistics about the execution, we will use the memory usage statistic to plot the resource utilization of each program.
 
 \chapter{Experimental setup}
-Experiments will be done on projects of two programming languages: Python and Java. As we have seen above, some experiments require static program analysis, whilst others require dynamic program analysis. This requires us to use suitable projects that meet our requirements.
+\todo{what is the way that your experiments will enable you to answer the research question?}
+Experiments are conducted on projects developed using either Python or Java \todo{why did you select these languages?} Some experiments require static program analysis \todo{why? this link was never made before and it should be made earlier (possibly in research): which metric needs which type of analysis?}, whilst others require dynamic program analysis. This requires us to use suitable projects that meet our requirements \todo{this is the place for the details that you now list in the research chapter}.
+
+\section{Limitations}
+First of all, we only use projects with less than 100k lines. Secondly, we do not use any files that are empty, nor do we use any test files or files place inside test directories. For this exclusion, we assume that test files will either have 'test' in their name, or are situated in a place where a parent folder contains the word 'test' in its name. Besides this we will also ignore files that produce an error while being evaluated. If a big part of all files within a project produce errors, and are thus discarded, we will discard the entire project since we would not be able to give an accurate result for the entire program.
 
 \section{Python experiments}
-Our Python test suite consists of a total of 39 projects. These projects are all categorized and used in different experiments, below an overview of the experiments and used projects.
+Our Python test suite consists of a total of 39 projects. These projects are all categorized and used in different experiments \todo{different experiments than what? do you have a reference list to these projects? you should!}, \todo{properly refer to the overview} below an overview of the experiments and used projects.
 
 \myparagraph{Method validation}
-In the modularity calculation method validation we will make use of 31 Python projects. These projects consist of nine micro web frameworks, seven cryptocurrency related projects and seven IoT projects. The remaining test projects are web crawlers.
+In the modularity calculation method validation we use 31 Python projects \todo{above you mention 39, now you say 31: why the difference?}. These projects consist of nine micro web frameworks, seven cryptocurrency related projects and seven IoT projects. The remaining test projects are web crawlers.
 
 \myparagraph{Modularity vs. Maintainability}
-After the validation, 41 Python projects are used to do experiments on the relation between modularity and maintainability.
+After the validation, 41 Python projects are used to do experiments on the relation between modularity and maintainability \todo{what is the relationship between the 39, 31 and 41 projects?}.
 
 \myparagraph{Modularity vs. Performance efficiency}
-Measuring the differences in performance efficiency between multiple projects with a different modularity score requires a set of projects with the same functionality. Therefore the test suite will consist of 11 web crawlers written in Python.
+Measuring the differences in performance efficiency between multiple projects with a different modularity score requires a set of projects with the same functionality. Therefore the test suite consists of 11 web crawlers. \todo{what is the relationship between the 39, 31, 41 and 11 projects?}
 
 \section{Java experiments}
-By doing experiments on Java projects we are able to see whether our results from Python are also valid for Java (and could thus also be for other languages).
+By doing experiments on Java projects we are able to see whether our results from Python are also valid for Java \sout{(and could thus also be for other languages)}.
 
 \myparagraph{Modularity vs. Maintainability}
-Our Java test suite consists of 15 Java projects. Using these projects we will see if there are any similarities between the relation between modularity and maintainability in Java and Python. The test suite consists of projects related to IoT and web crawlers.
+Our Java test suite consists of 15 Java projects\todo{selected how?}. Using these projects we analyse whether there are any similarities between the relation between modularity and maintainability in Java and Python. The test suite consists of projects related to IoT and web crawlers\todo{why?}.
 
 \section{System specifications}
-Whilst static program analysis is generally not influenced by the operating system or processor, dynamic program analysis does get affected by the system specifications. All experiments have been executed on a laptop with the specifications seen in table \ref{table:specifications}.
+\todo{Good, you explained your choice!}Whilst static program analysis is generally not influenced by the operating system or processor, dynamic program analysis does get affected by the system specifications. All experiments have been executed on a laptop with the specifications seen in table \ref{table:specifications}.
 \begin{table}[H]
 \centering
 \caption{System specifications used in this research}
@@ -351,8 +357,11 @@ Whilst static program analysis is generally not influenced by the operating syst
 \end{table}
 
 \chapter{Results}
+\todo{add glue paragraph: how is this chapter organized and what is its point}
 \section{Modularity}
+\todo{you should just explain how you processed the data from the experiments into the plots presented in this chapter: did you remove outliers? why? how? did you smooth the data in a different way? why? how? }
 \myparagraph{Dependency measuring method validation}
+\todo{this is discussion, not clean presentation of results}
 As we can see in table \ref{table:validation}, our method produces the same result as the method using the Modularity Index in almost 75\% of all cases. Even though this isn't the ideal value, we can see that this percentage is almost the same for the Modularity Index vs. Better Code Hub approach. We can therefore conclude that even though our method doesn't fully align with neither the Modularity Index nor the Better Code Hub approach, it can be considered correct. One reason why we can say this is because of the flaws we found in both existing approaches. The flaw of the approach taken by Better Code Hub is that the main characteristics of a module are not taken in to account when computing the modularity (score). The Modularity Index, on the other hand, seems to be too complex, making it less reliable. This can be seen when looking at a formally fully modular program (for example a program with just one file in Python). When calculating the modularity using the Modularity Index approach this will produce a result stating that the program is not 100\% modular, even though it is. This is partially due to the fact that this method was originally developed for Java systems, which officially defines a module on a bigger scale than Python.
 
 \begin{table}[H]
@@ -390,6 +399,7 @@ As we can see from figure \ref{figure:mod-analysis} there is almost no correlati
 \end{figure}
 
 \myparagraph{Java}
+\todo{again, similar issue as above}
 Unlike Python, modularity and analysability show a slight positive correlation in Java programs. With a Pearson of coefficient of 0.222 and some (small) outliers this relation isn't very strong, but is clearly visible, as seen in figure \ref{figure:mod-analysis-java}.
 
 \subsection{Changeability}
@@ -402,7 +412,7 @@ Unlike Python, modularity and analysability show a slight positive correlation i
 \end{figure}
 
 \myparagraph{Python}
-The results of this test, see in figure \ref{figure:mod-change}, show a clear positive correlation between modularity and changeability in Python programs. With a Pearson coefficient of 0.457 this correlation is quite substantial.
+The results of this test are shown in Figure~\ref{figure:mod-change}, \todo{and you move to discussion with the text on clear positive correlation} show a clear positive correlation between modularity and changeability in Python programs. With a Pearson coefficient of 0.457 this correlation is \todo{use a ref here to support your claim of substantial; also, this is obviously part of discussion} quite substantial.
 
 \begin{figure}[H]
     \caption{Modularity vs. Changeability results in Java}
@@ -412,7 +422,7 @@ The results of this test, see in figure \ref{figure:mod-change}, show a clear po
 \end{figure}
 
 \myparagraph{Java}
-With a standard deviation of 0.708 there are a lot of outliers in the relation between modularity and changeability of Java programs. It appears that there is no substantial relation between the two characteristic, the Pearson coefficient is just 0.048. The results can be seen in figure \ref{figure:mod-change-java}.
+With a standard deviation of 0.708 there are a \todo{discussion} lot of outliers in the relation between modularity and changeability of Java programs. It appears that there is no substantial relation between the two characteristic, the Pearson coefficient is just 0.048. The results can be seen in figure \ref{figure:mod-change-java}.
 
 \subsection{Re-usability}
 
@@ -424,7 +434,7 @@ With a standard deviation of 0.708 there are a lot of outliers in the relation b
 \end{figure}
 
 \myparagraph{Python}
-Figure \ref{figure:mod-reuse} shows us that there is quite a large standard deviation in the re-usability scores of our Python test suite. The standard deviation we found is 0.525, which is less compact than the standard deviations of for example the analysability (0.207) and changeability (0.325). We can see a slight positive correlation between the modularity and re-usability of a program, which is supported by a Pearson coefficient of 0.137.
+Figure \ref{figure:mod-reuse} shows us that there is quite \todo{discussion} a large standard deviation in the re-usability scores of our Python test suite. The standard deviation we found is 0.525, which is less compact than the standard deviations of for example the analysability (0.207) and changeability (0.325). We can see a slight positive correlation between the modularity and re-usability of a program, which is supported by a Pearson coefficient of 0.137.
 
 \begin{figure}[H]
     \caption{Modularity vs. Re-usability results in Java}
@@ -434,7 +444,7 @@ Figure \ref{figure:mod-reuse} shows us that there is quite a large standard devi
 \end{figure}
 
 \myparagraph{Java}
-Figure \ref{figure:mod-reuse-java} show that, just like the changeability, re-usability in Java projects has a large standard deviation (0.589), showing that there is a lot of difference between different programs. The Pearson coefficient shows a slight negative correlation between modularity and re-usability. With a value of -0.030 you could say there is no relation at all.
+Figure \ref{figure:mod-reuse-java} shows that, just like the changeability, re-usability in Java projects has a large standard deviation (0.589), showing that \todo{discussion} there is a lot of difference between different programs. The Pearson coefficient shows a slight negative correlation between modularity and re-usability. With a value of -0.030 you could say there is no relation at all.
 
 \subsection{Testability}
 
@@ -446,7 +456,7 @@ Figure \ref{figure:mod-reuse-java} show that, just like the changeability, re-us
 \end{figure}
 
 \myparagraph{Python}
-The relation between modularity and testability in Python projects appears to be slightly positive. With a Pearson coefficient of 0.251 this correlation is stronger than that of re-usability, which also has a higher standard deviation. Figure \ref{figure:mod-test} shows the relation using our test suite.
+The relation between modularity and testability in Python projects appears to be \todo{discussion} slightly positive. With a Pearson coefficient of 0.251 this correlation is stronger than that of re-usability, which also has a higher standard deviation. Figure \ref{figure:mod-test} shows the relation using our test suite.
 
 \begin{figure}[H]
     \caption{Modularity vs. Testability results in Java}
@@ -456,10 +466,10 @@ The relation between modularity and testability in Python projects appears to be
 \end{figure}
 
 \myparagraph{Java}
-Just like changeability, testability in Java shows a large standard deviation of 0.740. As we can see in figure \ref{figure:mod-test-java} the scores are all very low, with many outliers far from the trend line. With a Pearson coefficient of -0.183 the relation between modularity and testability is quite negative.
+Just like changeability, testability in Java shows a large standard deviation of 0.740. As we can see in figure \ref{figure:mod-test-java} the scores are all very low \todo{discussion}, with many outliers far from the trend line. With a Pearson coefficient of -0.183 the relation between modularity and testability is quite negative.
 
 \subsection{Overall}
-
+\todo{discussion}
 \begin{figure}[H]
     \caption{Modularity vs. Maintainability results in Python}
     \label{figure:mod-main}
@@ -524,7 +534,7 @@ The two sub-characteristics of performance efficiency we have tested are resourc
         \includegraphics[width=0.65\textwidth]{modularity-resourceutilization}
 \end{figure}
 
-Figure \ref{figure:perf-res} shows that our data appears to be far apart. With a standard deviation of over 13000kb we can conclude that the differences between are very large, no matter the modularity score. However, with a Pearson coefficient of 0.287 we can see that there is positive correlation between the modularity and resource utilization of a program.
+Figure \ref{figure:perf-res} shows that our data appears \todo{discussion} to be far apart. With a standard deviation of over 13000kb we can conclude \todo{discussion} that the differences between are very large, no matter the modularity score. However, with a Pearson coefficient of 0.287 we can see that there is positive correlation \todo{discussion} between the modularity and resource utilization of a program.
 
 \myparagraph{Time behavior}
 \begin{figure}[H]
@@ -534,7 +544,7 @@ Figure \ref{figure:perf-res} shows that our data appears to be far apart. With a
         \includegraphics[width=0.65\textwidth]{modularity-timebehavior}
 \end{figure}
 
-The results seen in figure \ref{figure:perf-time} show that there is almost no correlation between modularity and execution speed. We can see that there is one big outlier which influences the data a lot. With this data point included we get a Pearson coefficient of just -0.015, and a standard deviation of 0.497. However, if we would remove this outlier, we get the results shown in figure \ref{figure:perf-time-no}. This figure shows all execution differences on a smaller scale. Using these results we get a Pearson coefficient of 0.169, which indicates a slightly positive correlation between the characteristics.
+The results seen in figure \ref{figure:perf-time} show that there is almost \todo{discussion} no correlation between modularity and execution speed. We can see that there is one big outlier which influences the data a lot. With this data point included we get a Pearson coefficient of just -0.015, and a standard deviation of 0.497. However, if we would remove this outlier, we get the results shown in figure \ref{figure:perf-time-no}. This figure shows all execution differences on a smaller scale. Using these results we get a Pearson coefficient of 0.169, which indicates a slightly positive correlation between the characteristics.
 
 \begin{figure}[H]
     \label{figure:perf-time-no}
@@ -544,6 +554,7 @@ The results seen in figure \ref{figure:perf-time} show that there is almost no c
 \end{figure}
 
 \myparagraph{Overview}
+\todo{discussion}
 Table \ref{table:perf-overview} contains the results for all performance efficiency characteristics that we have tested. We can see that the relations are both positive, meaning that a more modular program is likely to use more memory and take more time to execute.
 
 \begin{table}[H]
@@ -576,13 +587,13 @@ The reason why Java programs show a different result might be because of the way
 When looking at the effect of modularity on the resource utilization and time behavior of a program in Python, we can see that in both cases there is a slight positive correlation between the two. However, the Pearson coefficient values of 0.287 and 0.169 respectively indicate that a more modular program is likely to use more memory than a less modular program, as well as take longer to execute. This might also be due to the fact that a single module might contain more code, since all functionality is grouped together according to the definition of a module. The same could be a cause for the increase in execution time, since it will take longer to execute and load a bigger program. Overall we can say that modularity has a slight negative effect on the performance efficiency of a program since a positive correlation is present. 
 
 \chapter{Related Work}
-As we can conclude from other researches\cite{LinuxKernel,lee2000linux},modularity allows for more collaborative software development, and makes it easier to find and resolve bugs. However, we are curious whether modularity has any effect on the quality of software, something which cannot be determined from the above. Research has been done on this matter already\cite{stamelos2002code}. In this research, 100 open source C applications were investigated on different quality metrics. As a result, a clear relationship between high modularity and software quality was found. Whilst this follows our hypothesis, there are a few flaws to this research from our point of view. The main flaw is that the metrics used to define the quality of a program only covers a portion of all characteristics that are present in the ISO/IEC 25010 standard on software quality\cite{ISO25010}. Besides this, the research was focused on open source C applications, while our research focuses on (open source) Python applications.
+Modularity allows for more collaborative software development, and makes it easier to find and resolve bugs~\cite{LinuxKernel,lee2000linux}. However, we focus whether modularity has any effect on the quality of software, something which cannot be determined from the above. Research has been done on this matter already\cite{stamelos2002code}. In this research, 100 open source C applications were investigated on different quality metrics. As a result, a clear relationship between high modularity and software quality was found. Whilst this follows our hypothesis, there are a few flaws to this research from our point of view. The main flaw is that the metrics used to define the quality of a program only covers a portion of all characteristics that are present in the ISO/IEC 25010 standard on software quality\cite{ISO25010} \todo{we do too, why are those other guys worse?}. Besides this, the research was focused on open source C applications, while our research focuses on (open source) Python applications \todo{and? what difference between the languages would imply our research is needed? how about the module definition?}.
 
 \subsection*{Measuring modularity}
-There are already some methods to measure modularity, one of these methods is to only look at the coupling between modules\cite{BetterCodeHub,visser2016building}. This method looks at the number of incoming calls to a module. This way all external module dependencies will be evaluated to determine the modularity. However, the flaw to this method is that only incoming calls are evaluated, whilst outgoing calls provide a better insight into the dependencies of a module. It is also the case that the cohesion within a module is neglected, even though this shows how all components within a module are connected.
+There are already some methods to measure modularity\todo{if you say some, you should give more refs}, one of these methods is to only look at the coupling between modules\cite{BetterCodeHub,visser2016building}. This method looks at the number of incoming calls to a module. This way all external module dependencies need to be evaluated to determine the modularity. However, the flaw to this method is that only incoming calls are evaluated, whilst outgoing calls provide a better insight into the dependencies of a module \todo{why? here you should only briefly state the core of this idea, the details should have been explained in your research chapter, where you proposed the new metric}. It is also the case that the cohesion within a module is neglected, even though this shows how all components within a module are connected \todo{unclear sentence}.
 
 \myparagraph{Modularity Index}
-In another research regarding modularity, metrics have been created in order to specify the modularity of (open source) Java programs\cite{emanuel2013modularity}. Since it has proven to be effective to use a modular software architecture in open source projects, they tried to find a clear metric to justify this. To do this they focused on Java applications, making it somewhat unsuitable for our research. In their metric, an application consists of three layers: classes, packages and systems. Using the modularity that these layers produce, the modularity index can be computed, which defines the modularity of a program. There are however, a few flaws in this approach. First of all, when looking at class level modularity (which in turn influences the other layers) we can see that more metrics are used than just the two core modularity characteristics. This might have an unwanted effect on the outcome of our tests, since a simple program contained in a single module is not seen as fully modular using this approach, even though it follows the module guidelines. This might be due to the fact that in Java a module is of larger scale than in Python. Secondly, the main characteristics of a module (cohesion and coupling) are not seen as the most important factors when computing the modularity of a program. In fact, coupling isn't taken into account at all.
+Research regarding modularity proposed novel metrics in order to specify the modularity of (open source) Java programs\cite{emanuel2013modularity}. Since it has proven \todo{ref to the proof} to be effective to use a modular software architecture in open source projects, they tried to find a clear metric to justify this. To do this they focused on Java applications, making it somewhat unsuitable for our research. In their metric, an application consists of three layers: classes, packages and systems. Using the modularity that these layers produce, the modularity index can be computed, which defines the modularity of a program. There are however, a few flaws in this approach. First of all, when looking at class level modularity (which in turn influences the other layers) we can see that more metrics are used than just the two core modularity characteristics. This might have an unwanted effect on the outcome of our tests, since a simple program contained in a single module is not seen as fully modular using this approach, even though it follows the module guidelines. This might be due to the fact that in Java a module is by definition of larger scale \todo{what do you mean by scale?} than in Python. Secondly, the main characteristics of a module (cohesion and coupling) are not seen as the most important factors when computing the modularity of a program. In fact, coupling is not taken into account at all.
 
 \subsection*{Measuring maintainability}
 The predecessor of the ISO/IEC 25010 standard is the ISO/IEC 9126 standard\cite{ISO9126}. This standard also provided a list of software quality characteristics and their sub-characteristics. Researchers have developed a model for measuring the maintainability of a program using the ISO/IEC 9126 definition of maintainability\cite{heitlager2016practical}. They provided a number of metrics that can be used to calculate the sub-characteristics of maintainability, and the maintainability of a program itself. We make use of these metrics by adapting and extending them to fit the ISO/IEC 25010 standard's definition of maintainability. The original metrics can be found in appendix \ref{appendix:maintainability_metrics}.
