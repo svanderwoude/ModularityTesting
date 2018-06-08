@@ -102,7 +102,7 @@ The final sub-characteristic of maintainability is testability. Testability defi
 The fourth characteristic, performance efficiency, presents the performance relative to the amount of resources used under stated conditions. This means that three components of performance and resources have to be tested.
 
 \myparagraph{Capacity}
-The first component is capacity, capacity is defined as the degree to which the maximum limits of a product or system parameter meets the requirements. We will ignore this sub-characteristic since the capacity of a program is arbitrary.
+The first component is capacity, capacity is defined as the degree to which the maximum limits of a product or system parameter meets the requirements.
 
 \myparagraph{Resource utilization}
 Next, performance efficiency contains the sub-characteristic resource utilization. With resource utilization we mean the degree to which the amounts and types of resources used by a product or system, when performing its functions, meet the requirements.
@@ -187,6 +187,7 @@ In 1975, Fred Brooks observed that there is a positive correlation between the s
 This problem also occurred in the development of the Linux Kernel, which is an open source project\cite{LinuxKernel}. In 1996, the creator, Linus Torvalds, decided to move towards a modular software architecture which would allow him to set boundaries within which the developers of each module have full control over implementation and design details. This architecture countered Brooks' Law and allowed a large group of people to develop a computer program jointly. Torvalds stated that "without modularity, I would have to check every file that changed, which would be a lot, to make sure nothing was changed that would affect anything else. With modularity, when someone sends me patches to do a new file system and I don't necessarily trust the patches per se, I can still trust the fact that if nobody's using this file system, it's not going to impact anything else."\cite{lee2000linux}. Another study, on the Apache and Mozilla projects, also showed that high modularity (together with many bug finders and fixers (developers)) resulted in low defect densities and allowed for faster development\cite{mockus2002two}.\\
 
 \myparagraph{What is a module?}
+\label{paragraph:module-definition}
 Formally, a module is seen as a self-contained piece of software that contains everything necessary to execute only one aspect of a more broad functionality.\\
 
 It is worth noting that although there are languages that support modules, the official definition can still differ per language. For example, in Python each file is seen as a module\cite{pythonmodules}, while in Java a module is a collection of packages\cite{javamodules}. Thus, even though all languages use the same general definition of a module, the scale of what is considered a module varies between them.
@@ -251,7 +252,8 @@ Not all (sub-)characteristics of the ISO/IEC 25010 standard will be analyzed in 
 After defining which quality characteristics will be analyzed, we can look at how we will perform the experiments. We will have to find a set of projects to be tested. For each of these projects we will have to calculate the modularity and the two quality characteristics scores: maintainability and performance efficiency. Using these scores we can perform our analysis on the effect of modularity on the quality of software.
 
 \subsection{Program analysis}
-In order to analyze each program, we will have to make use of different analyzing methods. Some aspects, such as performance, require a program to be executed. Other characteristics of a program, for example code volume or complexity, do not require execution.\\
+\label{method:analysis}
+In order to analyze each program, we will have to make use of different analyzing methods. If we look at the characteristics that will be tested, maintainability does not require execution of the program in order to analyze it. Performance efficiency, however, does require execution of the program in order to gather information.\\
 
 In the first case, we employ dynamic program analysis\cite{nielson2015principles}.
 Dynamic program analysis is the analysis of software performed by executing the program on a real or virtual processor. In order to get accurate and effective results, dynamic program analysis should be performed multiple times.\\
@@ -267,19 +269,13 @@ Dependencies exist in many forms, such as (imported) variables and constants, bu
 
 \[ modularity = \dfrac{internal\ calls}{all\ calls} \]
 
-This will give us a percentage that represents the modularity of the tested module. After doing this for all modules within a program, we can calculate the modularity for the entire program by taking the average of all separate modules. \todo{ref to where you introduce the definiton of module}
+This will give us a percentage that represents the modularity of the tested module. After doing this for all modules within a program, we can calculate the modularity for the entire program by taking the average of all separate modules. See \autoref{paragraph:module-definition} for more information about modules.
 
 \myparagraph{Validating the categorization}
-It is important that the categorization of programs is correct, since any mistake could have a substantial impact on the outcome of the research. In order to validate the categorization mentioned above, we compare the outcomes of the categorizations to that of Better Code Hub\cite{BetterCodeHub} and the method using the Modularity Index\cite{emanuel2013modularity} \todo{here you should only mention that you compare against state-of-the-art established methods}.
-
-\todo{this part belongs to related work, since you give a different definition and use a different way to compute it} Better Code Hub is a tool developed by the Software Improvement Group\cite{SIG} which benchmarks a piece of software on their ten guidelines for maintainable software. One of these guidelines is 'Separate concerns in modules', which defines the modularity of a program. In order to measure this, Better Code Hub looks at the number of incoming calls to a module, which is then compared to the guideline values.
-\todo[inline]{Remove this because it is also explained in the related work section??? If not: add explanation of Modularity Index}
-\todo{Ana says: indeed, remove from here! the explanation of M.I. should be in background}
-
-\todo[inline]{these are details that should go in the evaluation setup; also, you no longer only use Python repos. Also, you already mentioned that you will be using various projects} We validate our method of classifying programs using a number of Python repositories. By using repositories that are somewhat the same in functionality we try to make the validation more accurate and more representative. During these tests we categorized a program as being modular when the modularity score exceeded the used threshold of 0.575 (or 57.5\%), which was deemed to be the optimal threshold.
+It is important that the categorization of programs is correct, since any mistake could have a substantial impact on the outcome of the research. In order to validate the categorization mentioned above, we compare the outcomes of the categorizations to that of Better Code Hub\cite{BetterCodeHub} and the method using the Modularity Index\cite{emanuel2013modularity}.
 
 \subsection{Maintainability}
-One of the main code quality characteristics is maintainability. As we have seen, maintainability can be split into the sub-characteristics analysability, modifiability, modularity, re-usability and testability. In order to compute the maintainability score for a program, we first calculate all sub-characteristic scores. In order to calculate these, we  use an updated version of metrics~\cite{heitlager2016practical}. The weighted average of scores from other, \todo{what do you mean by even more defined?} even more defined, sub-characteristics, are used to calculate the main characteristic scores. Table~\ref{table:maintainability-weights} shows the complete metric matrix.
+One of the main code quality characteristics is maintainability. As we have seen, maintainability can be split into the sub-characteristics analysability, modifiability, modularity, re-usability and testability. In order to compute the maintainability score for a program, we first calculate all sub-characteristic scores. In order to calculate these, we  use an updated version of metrics~\cite{heitlager2016practical}. The weighted average of scores from other sub-characteristics, which look at code level, are used to calculate the main characteristic scores. Table~\ref{table:maintainability-weights} shows the complete metric matrix.
 
 \begin{table}[H]
 \centering
@@ -298,7 +294,7 @@ One of the main code quality characteristics is maintainability. As we have seen
 \end{tabular}
 \end{table}
 
-In order to measure each sub-characteristic defined above, we use an existing model~\cite{heitlager2016practical} as a guideline. However, we have adapted this slightly to better fit our case \todo{in }. The metrics that we use for each sub-characteristic can be found in Appendix~\ref{appendix:maintainability_metrics}. Based \todo{this sentence seems superfluous; what is its point?} on the scores for each sub-characteristic we can calculate the score for each maintainability characteristic using the weighted average of a set of sub-characteristics, as defined above.\\
+In order to measure each sub-characteristic defined above, we use an existing model\cite{heitlager2016practical} as a guideline. However, we have adapted this slightly to better fit our case. The metrics that we use for each sub-characteristic can be found in Appendix\ref{appendix:maintainability_metrics}.\\
 
 Once we computed the scores for each maintainability characteristic, we can use these to find the maintainability score for a program using the following formula:
 
@@ -311,39 +307,40 @@ $MS$ = Modularity Score\\
 $RS$ = Re-usability Score\\
 $TS$ = Testability Score\\
 \\
-This formula is based on the metric defined by the Software Improvement Group, as seen in Figure~\ref{figure:maintainability_weights}. Since that model uses the ISO/IEC 9126 definition of maintainability, it is slightly adapted and extended. Our metric uses the weight ratios for analysability and testability as defined in their work \todo{whose work?}. We extended this by also applying the weight of testability to the changeability and re-usability scores, since they are of the same importance to maintainability. Finally, since modularity is part of maintainability in the ISO/IEC 25010 standard, we included it in the formula. Since we are looking at the relation between modularity and maintainability, the weight of modularity in this formula is kept low since it would show a positive correlation between the two if we did not.
+This formula is based on the metric defined by the Software Improvement Group, as seen in Figure~\ref{figure:maintainability_weights}. Since that model uses the ISO/IEC 9126 definition of maintainability, it is slightly adapted and extended. Our metric uses the weight ratios for analysability and testability as defined in the work by SIG. We extended this by also applying the weight of testability to the changeability and re-usability scores, since they are of the same importance to maintainability. Finally, since modularity is part of maintainability in the ISO/IEC 25010 standard, we included it in the formula. Since we are looking at the relation between modularity and maintainability, the weight of modularity in this formula is kept low since it would show a positive correlation between the two if we did not.
 
 \subsection{Performance efficiency}
-Performance efficiency consists of three sub-characteristics: capacity, resource utilization and time behavior. For our research we will discard capacity todo{why is it discarded?} and only focus on resource utilization and time behavior during normal execution. In order to measure these performance characteristics we make use of dynamic program analysis. We \todo{what is the point of this web crawling activity and why should it be described in here and not in the evaluation setup?}  make eight Python web crawlers perform the same action on a web page for 100 iterations. After these iterations we are able to take the average time taken for each tool and compare that to the modularity score of each program. We make all crawlers extract the first input element, or somethings similar, from the Google homepage (https://google.com) in each iteration.
+\label{method:performance}
+Performance efficiency consists of three sub-characteristics: capacity, resource utilization and time behavior. For our research we will discard capacity, since the capacity of a program is arbitrary, and only focus on resource utilization and time behavior during normal execution. In order to measure these performance characteristics we make use of dynamic program analysis. We will make a set of projects perform the same functionality for a number of iterations in order to measure the execution speed. After these iterations we are able to take the average time taken for each tool and compare that to the modularity score of each program.\\
+
 In order to measure the resource utilization we will run each program with the built-in time module of Ubuntu. This will give us some statistics about the execution, we will use the memory usage statistic to plot the resource utilization of each program.
 
 \chapter{Experimental setup}
-\todo{what is the way that your experiments will enable you to answer the research question?}
-Experiments are conducted on projects developed using either Python or Java \todo{why did you select these languages?} Some experiments require static program analysis \todo{why? this link was never made before and it should be made earlier (possibly in research): which metric needs which type of analysis?}, whilst others require dynamic program analysis. This requires us to use suitable projects that meet our requirements \todo{this is the place for the details that you now list in the research chapter}.
+Experiments are conducted on projects developed in Python, since Python is a modern and easy to analyze language. Besides providing built-in methods to analyze programs, Python also uses the same definition of a module that we use: a single file. Besides analyzing Python projects, we also perform experiments on Java programs regarding the relation between modularity and maintainability. Just like Python, Java is a popular language, used in many big (open source) projects, making it interesting to analyze. Using the results from all experiments we can see the relation between modularity and the quality characteristics, which can be used to answer the research question. Since some experiments require dynamic program analysis, as mentioned in \autoref{method:analysis}, we have to find suitable projects that meet our requirements for each experiment.
 
 \section{Limitations}
 First of all, we only use projects with less than 100k lines. Secondly, we do not use any files that are empty, nor do we use any test files or files place inside test directories. For this exclusion, we assume that test files will either have 'test' in their name, or are situated in a place where a parent folder contains the word 'test' in its name. Besides this we will also ignore files that produce an error while being evaluated. If a big part of all files within a project produce errors, and are thus discarded, we will discard the entire project since we would not be able to give an accurate result for the entire program.
 
 \section{Python experiments}
-Our Python test suite consists of a total of 39 projects. These projects are all categorized and used in different experiments \todo{different experiments than what? do you have a reference list to these projects? you should!}, \todo{properly refer to the overview} below an overview of the experiments and used projects.
+Our Python test suite consists of a total of 39 projects. These projects are all categorized and used in different experiments like method validation and maintainability testing. The full list of projects is available in appendix \ref{appendix:projects}. An overview of all experiments is discussed below.
 
 \myparagraph{Method validation}
-In the modularity calculation method validation we use 31 Python projects \todo{above you mention 39, now you say 31: why the difference?}. These projects consist of nine micro web frameworks, seven cryptocurrency related projects and seven IoT projects. The remaining test projects are web crawlers.
+We validate our method of classifying programs using 31 of our 39 Python repositories. By using projects that are somewhat the same in functionality we try to make the validation more accurate and more representative. These projects consist of nine micro web frameworks, seven cryptocurrency related projects and seven IoT projects. The remaining test projects are web crawlers. During these tests we categorized a program as being modular when the modularity score exceeded the used threshold of 0.575 (or 57.5\%), which was deemed to be the optimal threshold.
 
 \myparagraph{Modularity vs. Maintainability}
-After the validation, 41 Python projects are used to do experiments on the relation between modularity and maintainability \todo{what is the relationship between the 39, 31 and 41 projects?}.
+After the validation, all 39 Python projects are used to do experiments on the relation between modularity and maintainability.
 
 \myparagraph{Modularity vs. Performance efficiency}
-Measuring the differences in performance efficiency between multiple projects with a different modularity score requires a set of projects with the same functionality. Therefore the test suite consists of 11 web crawlers. \todo{what is the relationship between the 39, 31, 41 and 11 projects?}
+Measuring the differences in performance efficiency between multiple projects with a different modularity score requires a set of projects with the same functionality. Therefore the test suite consists of 11 web crawlers. We will use these web crawlers to extract the first input element from the Google homepage (https://google.com). As mentioned in \autoref{method:performance}, we will perform this iteration 100 times in order to get a representative result.
 
 \section{Java experiments}
 By doing experiments on Java projects we are able to see whether our results from Python are also valid for Java \sout{(and could thus also be for other languages)}.
 
 \myparagraph{Modularity vs. Maintainability}
-Our Java test suite consists of 15 Java projects\todo{selected how?}. Using these projects we analyse whether there are any similarities between the relation between modularity and maintainability in Java and Python. The test suite consists of projects related to IoT and web crawlers\todo{why?}.
+Our Java test suite consists of 15 Java projects, which are popular IoT and web crawler projects. Using these projects we analyze whether there are any similarities between the relation between modularity and maintainability in Java and Python. By using IoT and web crawler we use projects that are also analyzed in the Python experiments, keeping some level of consistency between the experiments.
 
 \section{System specifications}
-\todo{Good, you explained your choice!}Whilst static program analysis is generally not influenced by the operating system or processor, dynamic program analysis does get affected by the system specifications. All experiments have been executed on a laptop with the specifications seen in table \ref{table:specifications}.
+Whilst static program analysis is generally not influenced by the operating system or processor, dynamic program analysis does get affected by the system specifications. All experiments have been executed on a laptop with the specifications seen in table \ref{table:specifications}.
 \begin{table}[H]
 \centering
 \caption{System specifications used in this research}
@@ -618,6 +615,9 @@ Besides looking at maintainability, the performance efficiency was also measured
     \centering
         \includegraphics[width=0.70\textwidth]{maintainability_weights}
 \end{figure}
+
+\chapter{Projects used in experiments}
+\label{appendix:projects}
 
 \end{appendices}
 
