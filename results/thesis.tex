@@ -47,7 +47,7 @@ This research uses a quantitative approach. Experiments are done using existing 
 This work will expand on existing research on software measurements regarding modularity\cite{BetterCodeHub,visser2016building,emanuel2013modularity} of Python and Java programs. The outcome of this research will provide a new simple and effective method of measuring modularity. Besides providing this new methodology, a framework is created with which the quality characteristics maintainability and performance efficiency can be measured in any Python program. We will create new metrics built on top of existing metrics\cite{heitlager2016practical} to allow for measurements on these characteristics.
 
 \section{Thesis outline}
-\todo[inline]{Do this once all other content is done to prevent incorrect information}
+In order to answer our research question, we will have to go through a few steps. First of all, we will look into some basic information and concepts that are used throughout this work. After information about software quality and software design, we look at the experiments that are necessary to answer our research question. In \autoref{chapter:setup} we will look at the experimental setup that is used to perform the experiments, after which the results of all experiments are shown in \autoref{chapter:results}. Finally we will discuss these results and come to a conclusion in \autoref{chapter:conclusion}.
 
 \chapter{Background}
 \label{chapter:background}
@@ -316,6 +316,7 @@ Performance efficiency consists of three sub-characteristics: capacity, resource
 In order to measure the resource utilization we will run each program with the built-in time module of Ubuntu. This will give us some statistics about the execution, we will use the memory usage statistic to plot the resource utilization of each program.
 
 \chapter{Experimental setup}
+\label{chapter:setup}
 Experiments are conducted on projects developed in Python, since Python is a modern and easy to analyze language. Besides providing built-in methods to analyze programs, Python also uses the same definition of a module that we use: a single file. Besides analyzing Python projects, we also perform experiments on Java programs regarding the relation between modularity and maintainability. Just like Python, Java is a popular language, used in many big (open source) projects, making it interesting to analyze. Using the results from all experiments we can see the relation between modularity and the quality characteristics, which can be used to answer the research question. Since some experiments require dynamic program analysis, as mentioned in \autoref{method:analysis}, we have to find suitable projects that meet our requirements for each experiment.
 
 \section{Limitations}
@@ -354,6 +355,7 @@ Whilst static program analysis is generally not influenced by the operating syst
 \end{table}
 
 \chapter{Results}
+\label{chapter:results}
 After performing all experiments, we can analyze the results. Our experiments are categorized into three sections: modularity, maintainability and performance efficiency. In the first section we will use the results from the modularity calculation experiments in order to validate our method of calculating the degree of modularity of Python programs. In the maintainability section we will analyze the results of all sub-characteristics involved in maintainability, and their relation with modularity. The final section will show all results regarding performance efficiency.
 
 \section{Modularity}
@@ -605,6 +607,7 @@ Research regarding modularity proposed novel metrics in order to specify the mod
 The predecessor of the ISO/IEC 25010 standard is the ISO/IEC 9126 standard\cite{ISO9126}. This standard also provided a list of software quality characteristics and their sub-characteristics. Researchers have developed a model for measuring the maintainability of a program using the ISO/IEC 9126 definition of maintainability\cite{heitlager2016practical}. They provided a number of metrics that can be used to calculate the sub-characteristics of maintainability, and the maintainability of a program itself. We make use of these metrics by adapting and extending them to fit the ISO/IEC 25010 standard's definition of maintainability. The original metrics can be found in appendix \ref{appendix:maintainability_metrics}.
 
 \chapter{Conclusion}
+\label{chapter:conclusion}
 Writing high quality software is deemed very important in many cases, both in private and corporate projects. It is known that this becomes harder when the size of the project increases\cite{bhatia2014survey,banker1993software}. Thus, many big projects make use of a modular software design. One of these examples is the open source project for the Linux kernel\cite{lee2000linux}. However, does this design technique only improve the development cycle, or does modular programming also have an effect on the quality of the software?\\
 
 In this thesis we have developed and used a few methods in order to answer this question. We defined quality as the ISO/IEC 25010 standard characteristics\cite{ISO25010}, of which we looked at maintainability and performance efficiency. By using our own method of calculating the modularity of programs we were able to analyze the relation between modularity and the sub-characteristics involved with these characteristics. Results have shown that there is in fact a positive relation between the modularity and maintainability of a program. Whilst one of the sub-characteristics shows a negative correlation, analysability, the overall maintainability correlation is quite positive with a Pearson coefficient of 0.521 in Python programs. We have tried to see whether this conclusion could also be applied to other languages, such as Java. It seemed however, that this is not the case. With a Pearson coefficient of just 0.163 and a high standard deviation of all data points, this correlation is much weaker and might show us that this cannot be applied to Java programs.\\
