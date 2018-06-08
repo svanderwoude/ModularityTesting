@@ -23,7 +23,7 @@
 \maketitle
 
 \begin{abstract}
-Modular programming is a highly used software design pattern in both private and open source software projects. Despite previous research on the effect of modularity on the development cycle, there is no recent research on the effect of modularity on the quality of software using the ISO/IEC 25010 standard. In this work, a method is presented to detect the level of modularity for any software project. This method is an alternative to existing methods, providing a simple but effective way of defining the modularity of a program. By using this method, the modularity of a program can be compared to various quality characteristics. We performed several sets of experiments to analyze the effect of modularity on the quality of software, as defined in the ISO/IEC 25010 standard. Our analysis shows that there is in fact a positive correlation between the modularity and the quality of Python programs. We also find a weaker correlation between modularity and quality of Java programs.
+Modular programming is a highly used software design pattern in both private and open source software projects. Despite previous research on the effect of modularity on the development cycle, there is no recent research on the effect of modularity on the quality of software using the ISO/IEC 25010 standard. In this work, a method is presented to detect the level of modularity for any software project. This method is an alternative to existing methods, providing a simple but effective way of defining the modularity of a program. By using this method, the modularity of a program can be compared to various quality characteristics. We performed several sets of experiments to analyze the effect of modularity on the quality of software, as defined in the ISO/IEC 25010 standard. Our analysis shows that there is in fact a positive correlation between the modularity and the quality of Python programs. We also find a weak correlation between modularity and quality of Java programs.
 \end{abstract}
 
 \tableofcontents
@@ -35,11 +35,11 @@ Creating high quality software is often very difficult since you want to keep yo
 If we look at a more general view of software, we get to the field of software design. Software design is the process by which an agent creates a specification of a software artifact, intended to accomplish goals, using a set of primitive components and subject to constraints\cite{ralph2009proposal}. One of these design techniques is modular programming\cite{barnett1968modular}, which we will analyze in this thesis. Modular programming emphasizes separating the functionality of a program into independent, interchangeable modules, such that each contains everything necessary to execute only one aspect of the desired functionality.
 
 \section{Research questions and methodology}
-The goal of this research is to gauge whether there is a relation between the degree of modularity of a program and the quality of that program. Moreover, we study the effect of modularity on different quality characteristics: maintainability and performance efficiency. The research question is answered is as follows:
+The goal of this research is to gauge whether there is a relation between the degree of modularity of a program and the quality of that program. Moreover, we study the effect of modularity on different quality characteristics: maintainability and performance efficiency. The research question that will be answered is as follows:
 
 \[ \text{"What is the effect of modularity on the quality of software?"} \]
 
-In order to answer this question, a few other questions have to be answered. Since we have to define the degree of modularity of programs, we will have to answer the question "How can we easily and effectively calculate the degree of modularity of a program?". After this question has been answered, we have to find methods for measuring all (sub-) quality characteristics used to define the quality of software. Thus, for each characteristic we have to find an answer to the question "How can we measure [quality attribute] of a program?". Based on the answers to these questions we build e a framework to perform measurements on programs; The results are used to answer the main research question.\\
+In order to answer this question, a few other questions have to be answered. Since we have to define the degree of modularity of programs, we will have to answer the question "How can we easily and effectively calculate the degree of modularity of a program?". After this question has been answered, we have to find methods for measuring all (sub-) quality characteristics used to define the quality of software. Thus, for each characteristic we have to find an answer to the question "How can we measure [quality attribute] of a program?". Based on the answers to these questions we build a framework to perform measurements on programs; The results are used to answer the main research question.\\
 
 This research uses a quantitative approach. Experiments are done using existing literature and new ideas in order to generate data which can be used for statistical analysis. Using this analysis we will be able to analyze to what degree there is a relation between the modularity and quality of software. In this work a method of measuring the degree of modularity of a program is developed, after which a set of programs is tested on different quality characteristics, including modularity.
 
@@ -57,7 +57,7 @@ Writing good code is something you strive for from the day you start learning pr
 In 2011, the International Organization for Standardization released the ISO/IEC 25010 - 'System and software quality models' standard\cite{ISO25010}. This standard defines a set of models and characteristics to test software quality. This standard is a successor to the ISO/IEC 9126 - 'Product quality - Quality model' standard\cite{ISO9126} released in 2001. The latest version defines these characteristics in more detail and provides a new categorization of all characteristics and their sub-characteristics.
 
 \subsection{ISO/IEC 25010}
-The ISO/IEC 25010 standard defines eight characteristics that can be evaluated when looking at the quality of a piece of software. Some of these relate to the outcome of interaction when a product is used in a particular context, others relate to the static properties of software and dynamic properties of the computer system it is used in. We proceed to analyze the full list of characteristics in alphabetical order from the perspective of our research. Besides providing the description defined by ISO we will analyze the importance for this research.
+The ISO/IEC 25010 standard defines eight characteristics that can be evaluated when looking at the quality of a piece of software. Some of these relate to the outcome of interaction when a product is used in a particular context, others relate to the static properties of software and dynamic properties of the computer system it is used in. We proceed to analyze the full list of characteristics in alphabetical order from the perspective of our research.
 
 \subsection{Compatibility}
 The first quality characteristic is compatibility. Compatibility is referred to as the degree to which a product, system or component can exchange information with other products, systems or components, and/or perform its required functions, while sharing the same hardware or software environment. ISO divides this into two sub-characteristics: co-existence and interoperability.
@@ -253,7 +253,7 @@ After defining which quality characteristics will be analyzed, we can look at ho
 
 \subsection{Program analysis}
 \label{method:analysis}
-In order to analyze each program, we will have to make use of different analyzing methods. If we look at the characteristics that will be tested, maintainability does not require execution of the program in order to analyze it. Performance efficiency, however, does require execution of the program in order to gather information.\\
+In order to analyze each program, we will have to make use of different analyzing methods. If we look at the characteristics that will be tested, performance efficiency requires execution of the program in order to gather information, meanwhile maintainability does not require execution of the program in order to analyze it.\\
 
 In the first case, we employ dynamic program analysis\cite{nielson2015principles}.
 Dynamic program analysis is the analysis of software performed by executing the program on a real or virtual processor. In order to get accurate and effective results, dynamic program analysis should be performed multiple times.\\
@@ -262,10 +262,10 @@ In the second case, we employ static program analysis\cite{nielson2015principles
 Static program analysis is the analysis of software performed without executing the program. This form of program analysis is performed on the source code of a program and can give insight in aspects like volume, complexity and modularity (which we will cover below).
 
 \subsection{Modularity}
-In order to measure the modularity of a program correctly, we \sout{will} have to measure different aspects of a program. We achieve this by using the two main characteristics of a module, low coupling and high cohesion. Since these characteristics tell us something about the dependencies within a program, measuring the dependencies between modules would be an accurate representation of the modularity.  
+In order to measure the modularity of a program correctly, we have to measure different aspects of a program. We achieve this by using the two main characteristics of a module, low coupling and high cohesion. Since these characteristics tell us something about the dependencies within a program, measuring the dependencies between modules would be an accurate representation of the modularity.  
 
 \myparagraph{Measuring dependencies of a module}
-Dependencies exist in many forms, such as (imported) variables and constants, but mainly function calls and class definitions. Even though variables or constants used from other modules are also dependencies, we do not consider these relevant in this research. We do not consider them relevant since they do not have a direct impact on the functionality of the program, they mainly provide configuration. In order to measure the modularity of a module, we \sout{will} look at the function calls that exist within the module. We categorize these function calls into internal and external function calls. The former are function calls made to functions within the module itself, while the latter are calls to functions outside of the current module. Once we have gathered all function calls, and categorized them into their respective groups, we can calculate the modularity. We calculate the modularity of a module with the following formula:
+Dependencies exist in many forms, such as (imported) variables and constants, but mainly function calls and class definitions. Even though variables or constants used from other modules are also dependencies, we do not consider these relevant in this research. We do not consider them relevant since they do not have a direct impact on the functionality of the program, they mainly provide configuration. In order to measure the modularity of a module, we look at the function calls that exist within the module. We categorize these function calls into internal and external function calls. The former are function calls made to functions within the module itself, while the latter are calls to functions outside of the current module. Once we have gathered all function calls, and categorized them into their respective groups, we can calculate the modularity. We calculate the modularity of a module with the following formula:
 
 \[ modularity = \dfrac{internal\ calls}{all\ calls} \]
 
@@ -275,7 +275,7 @@ This will give us a percentage that represents the modularity of the tested modu
 It is important that the categorization of programs is correct, since any mistake could have a substantial impact on the outcome of the research. In order to validate the categorization mentioned above, we compare the outcomes of the categorizations to that of Better Code Hub\cite{BetterCodeHub} and the method using the Modularity Index\cite{emanuel2013modularity}.
 
 \subsection{Maintainability}
-One of the main code quality characteristics is maintainability. As we have seen, maintainability can be split into the sub-characteristics analysability, modifiability, modularity, re-usability and testability. In order to compute the maintainability score for a program, we first calculate all sub-characteristic scores. In order to calculate these, we  use an updated version of metrics~\cite{heitlager2016practical}. The weighted average of scores from other sub-characteristics, which look at code level, are used to calculate the main characteristic scores. Table~\ref{table:maintainability-weights} shows the complete metric matrix.
+One of the main code quality characteristics is maintainability. As we have seen, maintainability can be split into the sub-characteristics analysability, modifiability, modularity, re-usability and testability. In order to compute the maintainability score for a program, we first calculate all sub-characteristic scores. In order to calculate these, we  use an updated version of existing metrics~\cite{heitlager2016practical}. The weighted average of scores from other sub-characteristics, which look at code level, are used to calculate the main characteristic scores. Table~\ref{table:maintainability-weights} shows the complete metric matrix.
 
 \begin{table}[H]
 \centering
@@ -294,7 +294,7 @@ One of the main code quality characteristics is maintainability. As we have seen
 \end{tabular}
 \end{table}
 
-In order to measure each sub-characteristic defined above, we use an existing model\cite{heitlager2016practical} as a guideline. However, we have adapted this slightly to better fit our case. The metrics that we use for each sub-characteristic can be found in Appendix\ref{appendix:maintainability_metrics}.\\
+In order to measure each sub-characteristic defined above, we use an existing model\cite{heitlager2016practical} as a guideline. However, we have adapted this slightly to better fit our case. The original metrics that we use for each sub-characteristic can be found in Appendix\ref{appendix:maintainability_metrics}.\\
 
 Once we computed the scores for each maintainability characteristic, we can use these to find the maintainability score for a program using the following formula:
 
@@ -335,7 +335,7 @@ After the validation, all 39 Python projects are used to do experiments on the r
 Measuring the differences in performance efficiency between multiple projects with a different modularity score requires a set of projects with the same functionality. Therefore the test suite consists of 11 web crawlers. We will use these web crawlers to extract the first input element from the Google homepage (https://google.com). As mentioned in \autoref{method:performance}, we will perform this iteration 100 times in order to get a representative result.
 
 \section{Java experiments}
-By doing experiments on Java projects we are able to see whether our results from Python are also valid for Java \sout{(and could thus also be for other languages)}.
+By doing experiments on Java projects we are able to see whether our results from Python are also valid for Java.
 
 \myparagraph{Modularity vs. Maintainability}
 Our Java test suite consists of 15 Java projects, which are popular IoT and web crawler projects. Using these projects we analyze whether there are any similarities between the relation between modularity and maintainability in Java and Python. By using IoT and web crawler we use projects that are also analyzed in the Python experiments, keeping some level of consistency between the experiments.
@@ -359,10 +359,7 @@ Whilst static program analysis is generally not influenced by the operating syst
 After performing all experiments, we can analyze the results. Our experiments are categorized into three sections: modularity, maintainability and performance efficiency. In the first section we will use the results from the modularity calculation experiments in order to validate our method of calculating the degree of modularity of Python programs. In the maintainability section we will analyze the results of all sub-characteristics involved in maintainability, and their relation with modularity. The final section will show all results regarding performance efficiency.
 
 \section{Modularity}
-In order to perform our modularity analysis, we have categorized each program from the test suite into the category modular or non-modular using our own method. This method has been compared to existing methods of categorizing programs as modular or not.
-
-\myparagraph{Dependency measuring method validation}
-We have categorized our test suite into the categories modular or non-modular using our own method. We compared these results to existing methods in order to validate our own method. The results of these experiments can be seen in table \ref{table:validation}.
+In order to perform our modularity analysis, we have categorized each program from the test suite into the category modular or non-modular using our own method. This method has been compared to existing methods of categorizing programs as modular or not. The results of these experiments can be seen in table \ref{table:validation}.
 
 \begin{table}[H]
 \centering
@@ -377,7 +374,7 @@ We have categorized our test suite into the categories modular or non-modular us
 \end{table}
 
 \section{Maintainability}
-Maintainability consists of five sub-characteristics, which were all calculated for each of the projects in our test set. For each of the sub-characteristics (excluding modularity) a scatter chart was created to visualize their relation to modularity and find a trend line supporting the results. The results for each sub-characteristic are discussed below.
+Maintainability consists of five sub-characteristics, which were all calculated for each of the projects in our test set. For each of the sub-characteristics (excluding modularity) a scatter chart was created to visualize their relation to modularity and find a trend line supporting the results. The results for each sub-characteristic are shown below.
 
 \subsection{Analysability}
 
@@ -590,7 +587,7 @@ The reason why Java programs show a different result might be because of the way
 \section{Modularity vs. Performance Efficiency}
 When looking at the effect of modularity on the resource utilization and time behavior of a program in Python, we can see that in both cases there is a slight positive correlation between the two. However, the Pearson coefficient values of 0.287 and 0.169 respectively indicate that a more modular program is likely to use more memory than a less modular program, as well as take longer to execute. This might also be due to the fact that a single module might contain more code, since all functionality is grouped together according to the definition of a module. The same could be a cause for the increase in execution time, since it will take longer to execute and load a bigger program.\\
 
-In the results of the experiments regarding the execution speed, we can see that there is one big outlier which influences the data a lot. With this data point included we get a Pearson coefficient of just -0.015, and a standard deviation of 0.497. However, if we would remove this outlier, we get the results shown in figure \ref{figure:perf-time-no}. This figure shows all execution differences on a smaller scale. Using these results we get a Pearson coefficient of 0.169, which indicates a slightly positive correlation between the characteristics.\\
+In the results of the experiments regarding the execution speed, we can see that there is one big outlier which influences the data a lot. With this data point included we get a Pearson coefficient of just -0.015, and a standard deviation of 0.497. This data point uses a different approach to the problem than the others. Whilst the others simply execute our task, this data point first sets up an environment to work with, making it much slower than the others. Since there is a clear difference in execution approach, and thus execution speed, we will remove this outlier. Removing this outlier gives us the results shown in figure \ref{figure:perf-time-no}. This figure shows all execution differences on a smaller scale. Using these results we get a Pearson coefficient of 0.169, which indicates a slightly positive correlation between the characteristics.\\
 
 Overall we can say that modularity has a slight negative effect on the performance efficiency of a program since a positive correlation is present. 
 
@@ -613,6 +610,9 @@ Writing high quality software is deemed very important in many cases, both in pr
 In this thesis we have developed and used a few methods in order to answer this question. We defined quality as the ISO/IEC 25010 standard characteristics\cite{ISO25010}, of which we looked at maintainability and performance efficiency. By using our own method of calculating the modularity of programs we were able to analyze the relation between modularity and the sub-characteristics involved with these characteristics. Results have shown that there is in fact a positive relation between the modularity and maintainability of a program. Whilst one of the sub-characteristics shows a negative correlation, analysability, the overall maintainability correlation is quite positive with a Pearson coefficient of 0.521 in Python programs. We have tried to see whether this conclusion could also be applied to other languages, such as Java. It seemed however, that this is not the case. With a Pearson coefficient of just 0.163 and a high standard deviation of all data points, this correlation is much weaker and might show us that this cannot be applied to Java programs.\\
 
 Besides looking at maintainability, the performance efficiency was also measured for Python programs with different modularity scores. The results of those experiments show us that there is also a slight positive correlation between the modularity and performance efficiency of Python software. However, this means that more modular are more likely to use more memory than less modular programs. The execution speed is not directly affected by the modularity of a program. It can, however, be affected by the memory usage, since that would have a (small) effect on the execution speed.
+
+\section{Future work}
+We have looked at the effect of modularity on maintainability and performance efficiency in Python programs, as well as the effect of modularity on maintainability in Java programs. This research could be expanded by performing experiments on more quality characteristics defined in the ISO/IEC 25010 standard, such as portability and security. Other research that might be interesting is to look at the effect of modularity on quality characteristics in programming languages other than Python. Whilst we have looked at Java as well, the experiments have not been as extensive as in Python. It would be interesting to see whether the same methodology that we used could be applied to more languages to see if a relation could be found there as well. Experiments could be done on languages that work like Python, such as Kotlin and Ruby. Future research could also include more types of dependencies besides function calls, such as class dependencies and variable dependencies.
 
 \bibliographystyle{IEEEtran}
 \bibliography{refs}
